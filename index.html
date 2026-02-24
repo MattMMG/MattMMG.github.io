@@ -22,7 +22,7 @@
             min-height: 100vh;
         }
 
-        /* ── Starfield ── */
+        /* Starfield */
         #stars { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
         .star { position:absolute; background:#fff; border-radius:50%; animation: twinkle linear infinite; }
         @keyframes twinkle {
@@ -30,135 +30,74 @@
             50% { opacity:.8; transform:scale(1.4); }
         }
 
-        /* ── TIMELINE ── */
+        /* TIMELINE */
         .timeline-wrapper { position:relative; }
         .timeline-wrapper::before {
-            content:'';
-            position:absolute;
-            left: 16px;
-            top: 0; bottom: 0;
-            width: 2px;
+            content:''; position:absolute; left:16px; top:0; bottom:0; width:2px;
             background: linear-gradient(to bottom, transparent, #1e3a8a 10%, #3b82f6 50%, #1e3a8a 90%, transparent);
         }
-        @media (min-width: 768px) {
-            .timeline-wrapper::before { left: 50%; transform: translateX(-1px); }
-        }
+        @media (min-width:768px) { .timeline-wrapper::before { left:50%; transform:translateX(-1px); } }
 
         .tl-item { position:relative; display:flex; flex-direction:column; margin-bottom:3rem; padding-left:48px; }
-        @media (min-width: 768px) {
+        @media (min-width:768px) {
             .tl-item { flex-direction:row; align-items:flex-start; padding-left:0; }
-            .tl-item:nth-child(odd) .tl-date  { order:1; text-align:right; padding-right:48px; padding-left:0; }
-            .tl-item:nth-child(odd) .tl-dot   { order:2; }
-            .tl-item:nth-child(odd) .tl-card  { order:3; padding-left:48px; padding-right:0; }
-            .tl-item:nth-child(even) .tl-date { order:3; text-align:left;  padding-left:48px; padding-right:0; }
+            .tl-item:nth-child(odd)  .tl-date { order:1; text-align:right; padding-right:48px; padding-left:0; }
+            .tl-item:nth-child(odd)  .tl-dot  { order:2; }
+            .tl-item:nth-child(odd)  .tl-card { order:3; padding-left:48px; padding-right:0; }
+            .tl-item:nth-child(even) .tl-date { order:3; text-align:left; padding-left:48px; padding-right:0; }
             .tl-item:nth-child(even) .tl-dot  { order:2; }
             .tl-item:nth-child(even) .tl-card { order:1; padding-right:48px; padding-left:0; text-align:left; }
             .tl-date { width:50%; }
             .tl-card { width:50%; }
         }
-
-        .tl-dot {
-            position:absolute; left:8px; top:8px;
-            width:18px; height:18px;
-            background:#3b82f6;
-            border-radius:50%;
-            border:3px solid #020617;
-            box-shadow: 0 0 12px rgba(59,130,246,.6);
-            flex-shrink:0;
-            z-index:2;
-        }
-        @media (min-width: 768px) {
-            .tl-dot {
-                position:relative; left:auto; top:auto;
-                margin-top:6px;
-            }
-        }
-
-        .tl-date { font-family:'Space Mono', monospace; font-size:.85rem; color:#60a5fa; font-weight:700; padding-top:4px; }
+        .tl-dot { position:absolute; left:8px; top:8px; width:18px; height:18px; background:#3b82f6; border-radius:50%; border:3px solid #020617; box-shadow:0 0 12px rgba(59,130,246,.6); flex-shrink:0; z-index:2; }
+        @media (min-width:768px) { .tl-dot { position:relative; left:auto; top:auto; margin-top:6px; } }
+        .tl-date { font-family:'Space Mono',monospace; font-size:.85rem; color:#60a5fa; font-weight:700; padding-top:4px; }
         @media (max-width:767px) { .tl-date { margin-bottom:.5rem; font-size:.8rem; } }
+        .tl-card { background:rgba(15,23,42,.85); backdrop-filter:blur(12px); border:1px solid rgba(51,65,85,.7); border-radius:1.25rem; padding:1.75rem 2rem; transition:border-color .3s, box-shadow .3s; }
+        .tl-card:hover { border-color:rgba(59,130,246,.5); box-shadow:0 0 30px rgba(59,130,246,.12); }
 
-        .tl-card {
-            background: rgba(15,23,42,.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(51,65,85,.7);
-            border-radius: 1.25rem;
-            padding: 1.75rem 2rem;
-            transition: border-color .3s, box-shadow .3s;
-        }
-        .tl-card:hover { border-color: rgba(59,130,246,.5); box-shadow: 0 0 30px rgba(59,130,246,.12); }
-
-        /* ── Pill badges ── */
+        /* Pill badges */
         .badge { display:inline-block; background:rgba(59,130,246,.15); border:1px solid rgba(59,130,246,.3); color:#93c5fd; border-radius:999px; padding:2px 12px; font-size:.78rem; font-weight:600; margin:2px 3px; }
 
-        /* ── Floating CV ── */
-        .floating-cv {
-            position:fixed; bottom:2rem; right:2rem; z-index:100;
-            display:flex; align-items:center; gap:.5rem;
-            background:#2563eb; color:#fff;
-            padding:.9rem 1.4rem; border-radius:999px;
-            font-weight:700; font-size:.95rem;
-            box-shadow: 0 8px 32px rgba(37,99,235,.45);
-            border: 1px solid rgba(147,197,253,.2);
-            transition: transform .25s, background .25s;
-            text-decoration:none;
-        }
-        .floating-cv:hover { transform:scale(1.06); background:#3b82f6; }
-
-        /* ── Lang switcher ── */
-        #lang-switcher {
-            position:fixed; top:5rem; right:1rem; z-index:60;
-            background:rgba(15,23,42,.9); backdrop-filter:blur(10px);
-            border:1px solid rgba(51,65,85,.8);
-            border-radius:.75rem; padding:.4rem;
-            display:flex; flex-direction:column; gap:.25rem;
-        }
-        #lang-switcher button {
-            background:transparent; border:none; color:#cbd5e1;
-            padding:.45rem .65rem; border-radius:.5rem;
-            cursor:pointer; font-weight:700; font-size:.78rem;
-            transition:background .2s, color .2s;
-        }
+        /* Lang switcher */
+        #lang-switcher { position:fixed; top:5rem; right:1rem; z-index:60; background:rgba(15,23,42,.9); backdrop-filter:blur(10px); border:1px solid rgba(51,65,85,.8); border-radius:.75rem; padding:.4rem; display:flex; flex-direction:column; gap:.25rem; }
+        #lang-switcher button { background:transparent; border:none; color:#cbd5e1; padding:.45rem .65rem; border-radius:.5rem; cursor:pointer; font-weight:700; font-size:.78rem; transition:background .2s, color .2s; }
         #lang-switcher button:hover, #lang-switcher button.active { background:rgba(59,130,246,.25); color:#93c5fd; }
 
-        /* ── Nav ── */
+        /* Nav */
         nav { position:sticky; top:0; z-index:50; background:rgba(2,6,23,.85); backdrop-filter:blur(16px); border-bottom:1px solid rgba(51,65,85,.4); }
-
-        /* ── Mobile nav ── */
         #mobile-menu { display:none; }
         #mobile-menu.open { display:block; }
 
-        /* ── Hero image ── */
-        .hero-img {
-            width:260px; height:320px; object-fit:cover;
-            border-radius:1.5rem;
-            border:2px solid rgba(51,65,85,.6);
-            box-shadow: 0 25px 60px rgba(0,0,0,.6), 0 0 80px rgba(37,99,235,.15);
-            transition:transform .5s;
-        }
+        /* Hero image */
+        .hero-img { width:260px; height:320px; object-fit:cover; border-radius:1.5rem; border:2px solid rgba(51,65,85,.6); box-shadow:0 25px 60px rgba(0,0,0,.6), 0 0 80px rgba(37,99,235,.15); transition:transform .5s; }
         .hero-img:hover { transform:rotate(0deg) scale(1.03); }
 
-        /* ── Skill chips ── */
-        .skill-chip {
-            background:rgba(15,23,42,.9);
-            border:1px solid rgba(59,130,246,.25);
-            color:#94a3b8; border-radius:.6rem;
-            padding:.5rem 1rem; font-size:.85rem; font-weight:600;
-            transition:border-color .2s, color .2s;
-        }
+        /* Skill chips */
+        .skill-chip { background:rgba(15,23,42,.9); border:1px solid rgba(59,130,246,.25); color:#94a3b8; border-radius:.6rem; padding:.5rem 1rem; font-size:.85rem; font-weight:600; transition:border-color .2s, color .2s; }
         .skill-chip:hover { border-color:#3b82f6; color:#e2e8f0; }
 
-        /* ── Scroll reveal ── */
+        /* Scroll reveal */
         .reveal { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
         .reveal.visible { opacity:1; transform:translateY(0); }
 
-        /* ── Section title underline ── */
+        /* Section title */
         .section-title { position:relative; display:inline-block; }
         .section-title::after { content:''; position:absolute; bottom:-8px; left:0; right:0; height:3px; background:linear-gradient(90deg,#3b82f6,transparent); border-radius:2px; }
+
+        /* CV Popup */
+        #cv-container { position:fixed; bottom:2rem; right:2rem; z-index:100; display:flex; flex-direction:column; align-items:flex-end; gap:.6rem; }
+        #cv-popup { display:none; flex-direction:column; gap:.5rem; align-items:flex-end; }
+        #cv-popup a { display:flex; align-items:center; gap:.6rem; background:#1e3a8a; color:#fff; padding:.7rem 1.25rem; border-radius:999px; font-weight:700; font-size:.88rem; white-space:nowrap; text-decoration:none; border:1px solid rgba(147,197,253,.2); box-shadow:0 4px 20px rgba(37,99,235,.35); transition:background .2s, transform .2s; }
+        #cv-popup a:hover { background:#2563eb; transform:scale(1.04); }
+        #cv-main-btn { display:flex; align-items:center; gap:.5rem; background:#2563eb; color:#fff; padding:.9rem 1.4rem; border-radius:999px; font-weight:700; font-size:.95rem; cursor:pointer; border:1px solid rgba(147,197,253,.2); box-shadow:0 8px 32px rgba(37,99,235,.45); transition:transform .25s, background .25s; }
+        #cv-main-btn:hover { transform:scale(1.06); background:#3b82f6; }
+        #cv-chevron { font-size:.75rem; transition:transform .3s; }
     </style>
 </head>
 <body>
 
-<!-- Starfield -->
 <div id="stars"></div>
 
 <!-- Language Switcher -->
@@ -168,31 +107,20 @@
     <button onclick="changeLanguage('pt')" id="btn-pt">🇧🇷 PT</button>
 </div>
 
-<!-- Floating CV Button — dropdown bilingüe -->
-<div id="cv-container" style="position:fixed; bottom:2rem; right:2rem; z-index:100; display:flex; flex-direction:column; align-items:flex-end; gap:.6rem;">
-
-    <!-- Popup con las dos opciones (oculto por defecto) -->
-    <div id="cv-popup" style="display:none; flex-direction:column; gap:.5rem; align-items:flex-end;">
-        <a href="CV_Matias_Maciel.pdf" target="_blank"
-           style="display:flex; align-items:center; gap:.5rem; background:#1e3a8a; color:#fff; padding:.7rem 1.2rem; border-radius:999px; font-weight:700; font-size:.88rem; text-decoration:none; border:1px solid rgba(147,197,253,.25); box-shadow:0 4px 20px rgba(37,99,235,.4); white-space:nowrap; transition:background .2s;"
-           onmouseover="this.style.background='#2563eb'" onmouseout="this.style.background='#1e3a8a'">
-            <span>🇪🇸</span> <i class="fas fa-file-pdf"></i> CV en Español
+<!-- Floating CV Button con popup bilingüe -->
+<div id="cv-container">
+    <div id="cv-popup">
+        <a href="CV_Matias_Maciel.pdf" target="_blank">
+            <i class="fas fa-file-pdf"></i> 🇪🇸 CV en Español
         </a>
-        <a href="MMG CV 2026.pdf" target="_blank"
-           style="display:flex; align-items:center; gap:.5rem; background:#1e3a8a; color:#fff; padding:.7rem 1.2rem; border-radius:999px; font-weight:700; font-size:.88rem; text-decoration:none; border:1px solid rgba(147,197,253,.25); box-shadow:0 4px 20px rgba(37,99,235,.4); white-space:nowrap; transition:background .2s;"
-           onmouseover="this.style.background='#2563eb'" onmouseout="this.style.background='#1e3a8a'">
-            <span>🇺🇸</span> <i class="fas fa-file-pdf"></i> CV in English
+        <a href="MMG%20CV%202026.pdf" target="_blank">
+            <i class="fas fa-file-pdf"></i> 🇺🇸 CV in English
         </a>
     </div>
-
-    <!-- Botón principal que abre/cierra el popup -->
-    <button onclick="toggleCvPopup()"
-            style="display:flex; align-items:center; gap:.5rem; background:#2563eb; color:#fff; padding:.9rem 1.4rem; border-radius:999px; font-weight:700; font-size:.95rem; border:1px solid rgba(147,197,253,.2); box-shadow:0 8px 32px rgba(37,99,235,.45); cursor:pointer; transition:transform .25s, background .25s;"
-            onmouseover="this.style.background='#3b82f6'; this.style.transform='scale(1.06)'"
-            onmouseout="this.style.background='#2563eb'; this.style.transform='scale(1)'">
+    <button id="cv-main-btn" onclick="toggleCvPopup()">
         <i class="fas fa-file-pdf"></i>
         <span class="lang-text" data-es="Descargar CV" data-en="Download CV" data-pt="Baixar CV">Descargar CV</span>
-        <i id="cv-chevron" class="fas fa-chevron-up" style="font-size:.75rem; transition:transform .25s;"></i>
+        <i id="cv-chevron" class="fas fa-chevron-up"></i>
     </button>
 </div>
 
@@ -200,19 +128,16 @@
 <nav>
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
         <a href="#" class="text-2xl font-extrabold text-white tracking-tight" style="font-family:'Space Mono',monospace">MMG<span class="text-blue-500">.</span></a>
-        <!-- Desktop -->
         <div class="hidden md:flex space-x-8 font-semibold text-slate-300">
-            <a href="#skills"      class="hover:text-blue-400 transition lang-text" data-es="Skills"       data-en="Skills"      data-pt="Skills">Skills</a>
-            <a href="#experiencia" class="hover:text-blue-400 transition lang-text" data-es="Experiencia"  data-en="Experience"  data-pt="Experiência">Experiencia</a>
-            <a href="#casos"       class="hover:text-blue-400 transition lang-text" data-es="Proyectos"    data-en="Projects"    data-pt="Projetos">Proyectos</a>
+            <a href="#skills"      class="hover:text-blue-400 transition lang-text" data-es="Skills"      data-en="Skills"     data-pt="Skills">Skills</a>
+            <a href="#experiencia" class="hover:text-blue-400 transition lang-text" data-es="Experiencia" data-en="Experience" data-pt="Experiência">Experiencia</a>
+            <a href="#casos"       class="hover:text-blue-400 transition lang-text" data-es="Proyectos"   data-en="Projects"   data-pt="Projetos">Proyectos</a>
             <a href="#contacto"    class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-500 transition shadow-lg shadow-blue-900/30 lang-text" data-es="Contacto" data-en="Contact" data-pt="Contato">Contacto</a>
         </div>
-        <!-- Hamburger -->
-        <button id="hamburger" class="md:hidden text-slate-300 hover:text-white" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
+        <button class="md:hidden text-slate-300 hover:text-white" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
             <i class="fas fa-bars text-xl"></i>
         </button>
     </div>
-    <!-- Mobile menu -->
     <div id="mobile-menu" class="md:hidden border-t border-slate-800/50 px-6 py-4 flex flex-col gap-4 text-slate-300 font-semibold">
         <a href="#skills"      onclick="document.getElementById('mobile-menu').classList.remove('open')" class="hover:text-blue-400 transition lang-text" data-es="Skills"      data-en="Skills"     data-pt="Skills">Skills</a>
         <a href="#experiencia" onclick="document.getElementById('mobile-menu').classList.remove('open')" class="hover:text-blue-400 transition lang-text" data-es="Experiencia" data-en="Experience" data-pt="Experiência">Experiencia</a>
@@ -221,7 +146,7 @@
     </div>
 </nav>
 
-<!-- ══════════════ HERO ══════════════ -->
+<!-- HERO -->
 <header class="container mx-auto px-6 py-20 md:py-32 flex flex-col md:flex-row items-center gap-12 relative z-10">
     <div class="md:w-2/3 text-center md:text-left">
         <p class="text-blue-400 font-bold tracking-[.25em] uppercase text-sm mb-4" style="font-family:'Space Mono',monospace">IAM &amp; Cybersecurity</p>
@@ -235,33 +160,28 @@
            data-pt="Especialista em IAM & CyberSecurity. Focado em ambientes críticos, estratégias Zero Trust e gestão avançada de mobilidade empresarial (Android/iOS).">
         </p>
         <div class="flex flex-wrap justify-center md:justify-start gap-4">
-            <a href="#casos" class="bg-blue-600 text-white px-7 py-3.5 rounded-xl text-base font-bold shadow-lg shadow-blue-900/40 hover:bg-blue-500 transition lang-text" data-es="Ver Proyectos" data-en="View Projects" data-pt="Ver Projetos"></a>
+            <a href="#casos"      class="bg-blue-600 text-white px-7 py-3.5 rounded-xl text-base font-bold shadow-lg shadow-blue-900/40 hover:bg-blue-500 transition lang-text" data-es="Ver Proyectos" data-en="View Projects" data-pt="Ver Projetos"></a>
             <a href="#experiencia" class="border border-slate-700 text-slate-300 px-7 py-3.5 rounded-xl text-base font-bold hover:bg-slate-800/60 hover:text-white transition lang-text" data-es="Trayectoria" data-en="Trajectory" data-pt="Trajetória"></a>
         </div>
     </div>
     <div class="md:w-1/3 flex justify-center relative">
         <div class="absolute inset-0 bg-blue-600/20 blur-[80px] rounded-full scale-75"></div>
-        <img src="CV foto.jpg" alt="Matias Maciel Gabriel"
-             class="hero-img relative z-10"
-             style="transform:rotate(2deg)"
+        <img src="CV foto.jpg" alt="Matias Maciel Gabriel" class="hero-img relative z-10" style="transform:rotate(2deg)"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-        <!-- Fallback avatar si no carga la foto -->
         <div style="display:none; width:260px; height:320px; background:linear-gradient(135deg,#1e3a8a,#312e81); border-radius:1.5rem; align-items:center; justify-content:center; border:2px solid rgba(51,65,85,.6);" class="relative z-10">
             <i class="fas fa-user text-7xl text-blue-400/60"></i>
         </div>
     </div>
 </header>
 
-<!-- ══════════════ SKILLS ══════════════ -->
+<!-- SKILLS -->
 <section id="skills" class="py-20 relative z-10">
     <div class="container mx-auto px-6">
         <h2 class="text-2xl font-bold mb-12 text-center text-white uppercase tracking-widest section-title mx-auto block w-fit lang-text"
             data-es="Stack Técnico" data-en="Tech Stack" data-pt="Stack Técnico"></h2>
-
         <div class="max-w-4xl mx-auto space-y-8 reveal">
-            <!-- Row 1 -->
             <div>
-                <p class="text-xs text-blue-400 font-bold tracking-widest uppercase mb-3" style="font-family:'Space Mono',monospace">Identity & Access</p>
+                <p class="text-xs text-blue-400 font-bold tracking-widest uppercase mb-3" style="font-family:'Space Mono',monospace">Identity &amp; Access</p>
                 <div class="flex flex-wrap gap-2">
                     <span class="skill-chip">Microsoft Entra ID / Azure AD</span>
                     <span class="skill-chip">SailPoint IdentityNow</span>
@@ -271,9 +191,8 @@
                     <span class="skill-chip">SSO / SAML / OAuth</span>
                 </div>
             </div>
-            <!-- Row 2 -->
             <div>
-                <p class="text-xs text-blue-400 font-bold tracking-widest uppercase mb-3" style="font-family:'Space Mono',monospace">Security & Compliance</p>
+                <p class="text-xs text-blue-400 font-bold tracking-widest uppercase mb-3" style="font-family:'Space Mono',monospace">Security &amp; Compliance</p>
                 <div class="flex flex-wrap gap-2">
                     <span class="skill-chip">Zero Trust Architecture</span>
                     <span class="skill-chip">Conditional Access</span>
@@ -283,28 +202,26 @@
                     <span class="skill-chip">Risk Governance</span>
                 </div>
             </div>
-            <!-- Row 3 -->
             <div>
-                <p class="text-xs text-blue-400 font-bold tracking-widest uppercase mb-3" style="font-family:'Space Mono',monospace">Platforms & Tools</p>
+                <p class="text-xs text-blue-400 font-bold tracking-widest uppercase mb-3" style="font-family:'Space Mono',monospace">Platforms &amp; Tools</p>
                 <div class="flex flex-wrap gap-2">
                     <span class="skill-chip">Microsoft 365 Enterprise</span>
                     <span class="skill-chip">ServiceNow</span>
                     <span class="skill-chip">VMware / Hyper-V / Citrix</span>
                     <span class="skill-chip">AirWatch / Workspace ONE</span>
                     <span class="skill-chip">Google Workspace</span>
-                    <span class="skill-chip">IBM Notes & Domino</span>
+                    <span class="skill-chip">IBM Notes &amp; Domino</span>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ══════════════ CASOS DE ÉXITO ══════════════ -->
+<!-- CASOS DE ÉXITO -->
 <section id="casos" class="py-24 relative z-10">
     <div class="container mx-auto px-6">
         <h2 class="text-2xl font-bold mb-16 text-center text-white uppercase tracking-widest section-title mx-auto block w-fit lang-text"
             data-es="Casos de Éxito" data-en="Success Cases" data-pt="Casos de Sucesso"></h2>
-
         <div class="max-w-5xl mx-auto reveal">
             <div class="bg-slate-900/70 backdrop-blur border border-slate-700/60 rounded-3xl p-8 md:p-12 shadow-2xl">
                 <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-10 pb-8 border-b border-slate-700/60">
@@ -322,15 +239,12 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="grid md:grid-cols-2 gap-8 text-slate-300">
-                    <!-- col 1 -->
                     <div class="lang-text"
                          data-es="<h4 class='font-bold text-white text-lg mb-4'>Arquitectura</h4><ul class='space-y-3'><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>Ecosistema Microsoft 365 con licenciamiento Enterprise.</span></li><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>Diseño de UX en In Company Portal para enrolamiento fluido.</span></li><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>Políticas de Acceso Condicional basadas en riesgo.</span></li></ul>"
                          data-en="<h4 class='font-bold text-white text-lg mb-4'>Architecture</h4><ul class='space-y-3'><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>Microsoft 365 Ecosystem with Enterprise licensing.</span></li><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>UX Design for In Company Portal seamless enrollment.</span></li><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>Risk-based Conditional Access Policies.</span></li></ul>"
                          data-pt="<h4 class='font-bold text-white text-lg mb-4'>Arquitetura</h4><ul class='space-y-3'><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>Ecossistema Microsoft 365 com licenciamento Enterprise.</span></li><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>Design de UX no In Company Portal para registro fluido.</span></li><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>Políticas de Acesso Condicional baseadas em risco.</span></li></ul>">
                     </div>
-                    <!-- col 2 -->
                     <div class="lang-text"
                          data-es="<h4 class='font-bold text-white text-lg mb-4'>Nivel de Madurez Avanzado</h4><ul class='space-y-3'><li class='flex items-start gap-3'><i class='fas fa-shield-alt text-blue-500 mt-0.5 flex-shrink-0'></i><span>Validación de Compliance y salud del dispositivo pre-acceso.</span></li><li class='flex items-start gap-3'><i class='fas fa-shield-alt text-blue-500 mt-0.5 flex-shrink-0'></i><span>Protección MAM-WE (DLP sin gestión total del dispositivo).</span></li><li class='flex items-start gap-3'><i class='fas fa-shield-alt text-blue-500 mt-0.5 flex-shrink-0'></i><span>Aislamiento estricto de entorno personal vs. corporativo.</span></li></ul>"
                          data-en="<h4 class='font-bold text-white text-lg mb-4'>Advanced Maturity Level</h4><ul class='space-y-3'><li class='flex items-start gap-3'><i class='fas fa-shield-alt text-blue-500 mt-0.5 flex-shrink-0'></i><span>Compliance Validation &amp; device health check pre-access.</span></li><li class='flex items-start gap-3'><i class='fas fa-shield-alt text-blue-500 mt-0.5 flex-shrink-0'></i><span>MAM-WE Protection (DLP without full device management).</span></li><li class='flex items-start gap-3'><i class='fas fa-shield-alt text-blue-500 mt-0.5 flex-shrink-0'></i><span>Strict isolation of personal vs. corporate environment.</span></li></ul>"
@@ -342,12 +256,11 @@
     </div>
 </section>
 
-<!-- ══════════════ EXPERIENCIA ══════════════ -->
+<!-- EXPERIENCIA -->
 <section id="experiencia" class="py-24 relative z-10">
     <div class="container mx-auto px-6">
         <h2 class="text-2xl font-bold mb-20 text-center text-white uppercase tracking-widest section-title mx-auto block w-fit lang-text"
             data-es="Experiencia Profesional" data-en="Professional Experience" data-pt="Experiência Profissional"></h2>
-
         <div class="max-w-5xl mx-auto timeline-wrapper">
 
             <!-- Citibank -->
@@ -361,7 +274,7 @@
                 </div>
             </div>
 
-            <!-- EY -->
+            <!-- EY GDS -->
             <div class="tl-item reveal">
                 <div class="tl-date">02/2021 – 04/2023</div>
                 <div class="tl-dot"></div>
@@ -372,7 +285,7 @@
                 </div>
             </div>
 
-            <!-- DXC -->
+            <!-- DXC Technology -->
             <div class="tl-item reveal">
                 <div class="tl-date">09/2020 – 02/2021</div>
                 <div class="tl-dot"></div>
@@ -420,12 +333,11 @@
     </div>
 </section>
 
-<!-- ══════════════ FOOTER / CONTACTO ══════════════ -->
+<!-- FOOTER -->
 <footer id="contacto" class="relative z-10 border-t border-slate-800/50 py-16 text-center">
     <div class="container mx-auto px-6">
         <h2 class="text-3xl font-extrabold mb-3 text-white lang-text" data-es="¿Conectamos?" data-en="Let's Connect" data-pt="Vamos Conectar?"></h2>
         <p class="text-slate-500 mb-8 lang-text" data-es="Abierto a oportunidades y proyectos desafiantes." data-en="Open to new opportunities and challenging projects." data-pt="Aberto a oportunidades e projetos desafiadores."></p>
-
         <div class="flex justify-center gap-6 mb-10">
             <a href="https://www.linkedin.com/in/matiasgmaciel/" target="_blank"
                class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500 transition text-xl">
@@ -435,69 +347,70 @@
                class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500 transition text-xl">
                 <i class="fab fa-github"></i>
             </a>
-            <a href="/cdn-cgi/l/email-protection#f79a96839ed99a96949e929bc0b7909a969e9bd994989a" class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500 transition text-xl">
+            <a href="mailto:mati.maciel7@gmail.com"
+               class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500 transition text-xl">
                 <i class="fas fa-envelope"></i>
             </a>
         </div>
-
         <p class="text-slate-600 text-xs uppercase tracking-widest" style="font-family:'Space Mono',monospace">
             © 2026 Matias Maciel Gabriel &nbsp;·&nbsp; Zero Trust Advocate
         </p>
     </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    /* ── CV Popup ── */
+<script>
+    /* CV Popup */
     function toggleCvPopup() {
-        const popup   = document.getElementById('cv-popup');
-        const chevron = document.getElementById('cv-chevron');
-        const isOpen  = popup.style.display === 'flex';
+        var popup   = document.getElementById('cv-popup');
+        var chevron = document.getElementById('cv-chevron');
+        var isOpen  = popup.style.display === 'flex';
         popup.style.display     = isOpen ? 'none' : 'flex';
         chevron.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
     }
     document.addEventListener('click', function(e) {
-        const container = document.getElementById('cv-container');
-        if (container && !container.contains(e.target)) {
+        var cont = document.getElementById('cv-container');
+        if (cont && !cont.contains(e.target)) {
             document.getElementById('cv-popup').style.display = 'none';
             document.getElementById('cv-chevron').style.transform = 'rotate(0deg)';
         }
     });
 
-    /* ── Starfield ── */
-    (function(){
-        const container = document.getElementById('stars');
-        for(let i=0;i<120;i++){
-            const s = document.createElement('div');
+    /* Starfield */
+    (function() {
+        var cont = document.getElementById('stars');
+        for (var i = 0; i < 120; i++) {
+            var s = document.createElement('div');
             s.className = 'star';
-            const size = Math.random()*1.8+.4;
-            s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-duration:${Math.random()*5+3}s;animation-delay:${Math.random()*6}s`;
-            container.appendChild(s);
+            var sz = Math.random() * 1.8 + 0.4;
+            s.style.cssText = 'width:'+sz+'px;height:'+sz+'px;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;animation-duration:'+(Math.random()*5+3)+'s;animation-delay:'+(Math.random()*6)+'s';
+            cont.appendChild(s);
         }
     })();
 
-    /* ── Language ── */
-    let currentLang = 'es';
+    /* Language */
     function changeLanguage(lang) {
-        currentLang = lang;
-        document.querySelectorAll('.lang-text').forEach(el => {
-            const val = el.getAttribute('data-' + lang);
+        document.querySelectorAll('.lang-text').forEach(function(el) {
+            var val = el.getAttribute('data-' + lang);
             if (!val) return;
-            if (/<[a-z]/i.test(val)) {
-                el.innerHTML = val;
-            } else {
-                el.textContent = val;
-            }
+            if (/<[a-z]/i.test(val)) { el.innerHTML = val; }
+            else { el.textContent = val; }
         });
-        ['es','en','pt'].forEach(l => {
-            const btn = document.getElementById('btn-'+l);
-            if(btn) btn.classList.toggle('active', l === lang);
+        ['es','en','pt'].forEach(function(l) {
+            var btn = document.getElementById('btn-' + l);
+            if (btn) btn.classList.toggle('active', l === lang);
         });
     }
 
-    /* ── Scroll reveal ── */
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    /* Scroll reveal */
+    var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
         });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(e
+    document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+
+    /* Init */
+    window.addEventListener('DOMContentLoaded', function() { changeLanguage('es'); });
+</script>
+</body>
+</html>
