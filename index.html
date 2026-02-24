@@ -6,195 +6,469 @@
     <title>Matias Maciel Gabriel | IAM & Cybersec Specialist</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Línea de tiempo ajustada para modo oscuro */
-        .timeline-line::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: #334155; } /* slate-700 */
-        @media (min-width: 768px) { .timeline-line::before { left: 50%; } }
-        .floating-cv { position: fixed; bottom: 2rem; right: 2rem; z-index: 100; transition: transform 0.3s; }
-        .floating-cv:hover { transform: scale(1.05); }
-        /* Fondo estilo Espacio Profundo */
+        * { box-sizing: border-box; }
+
         body {
-            background-color: #020617; /* slate-950 */
-            background-image: radial-gradient(at 50% 0%, rgba(30, 58, 138, 0.2) 0px, transparent 50%), radial-gradient(at 100% 0%, rgba(79, 70, 229, 0.15) 0px, transparent 50%);
-            color: #e2e8f0; /* slate-200 */
+            font-family: 'Syne', sans-serif;
+            background-color: #020617;
+            background-image:
+                radial-gradient(at 20% 10%, rgba(30, 58, 138, 0.25) 0px, transparent 55%),
+                radial-gradient(at 80% 5%, rgba(79, 70, 229, 0.18) 0px, transparent 50%),
+                radial-gradient(at 50% 90%, rgba(15, 30, 80, 0.3) 0px, transparent 60%);
+            color: #e2e8f0;
+            min-height: 100vh;
         }
+
+        /* ── Starfield ── */
+        #stars { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+        .star { position:absolute; background:#fff; border-radius:50%; animation: twinkle linear infinite; }
+        @keyframes twinkle {
+            0%,100% { opacity:.15; transform:scale(1); }
+            50% { opacity:.8; transform:scale(1.4); }
+        }
+
+        /* ── TIMELINE ── */
+        .timeline-wrapper { position:relative; }
+        .timeline-wrapper::before {
+            content:'';
+            position:absolute;
+            left: 16px;
+            top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, #1e3a8a 10%, #3b82f6 50%, #1e3a8a 90%, transparent);
+        }
+        @media (min-width: 768px) {
+            .timeline-wrapper::before { left: 50%; transform: translateX(-1px); }
+        }
+
+        .tl-item { position:relative; display:flex; flex-direction:column; margin-bottom:3rem; padding-left:48px; }
+        @media (min-width: 768px) {
+            .tl-item { flex-direction:row; align-items:flex-start; padding-left:0; }
+            .tl-item:nth-child(odd) .tl-date  { order:1; text-align:right; padding-right:48px; padding-left:0; }
+            .tl-item:nth-child(odd) .tl-dot   { order:2; }
+            .tl-item:nth-child(odd) .tl-card  { order:3; padding-left:48px; padding-right:0; }
+            .tl-item:nth-child(even) .tl-date { order:3; text-align:left;  padding-left:48px; padding-right:0; }
+            .tl-item:nth-child(even) .tl-dot  { order:2; }
+            .tl-item:nth-child(even) .tl-card { order:1; padding-right:48px; padding-left:0; text-align:left; }
+            .tl-date { width:50%; }
+            .tl-card { width:50%; }
+        }
+
+        .tl-dot {
+            position:absolute; left:8px; top:8px;
+            width:18px; height:18px;
+            background:#3b82f6;
+            border-radius:50%;
+            border:3px solid #020617;
+            box-shadow: 0 0 12px rgba(59,130,246,.6);
+            flex-shrink:0;
+            z-index:2;
+        }
+        @media (min-width: 768px) {
+            .tl-dot {
+                position:relative; left:auto; top:auto;
+                margin-top:6px;
+            }
+        }
+
+        .tl-date { font-family:'Space Mono', monospace; font-size:.85rem; color:#60a5fa; font-weight:700; padding-top:4px; }
+        @media (max-width:767px) { .tl-date { margin-bottom:.5rem; font-size:.8rem; } }
+
+        .tl-card {
+            background: rgba(15,23,42,.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51,65,85,.7);
+            border-radius: 1.25rem;
+            padding: 1.75rem 2rem;
+            transition: border-color .3s, box-shadow .3s;
+        }
+        .tl-card:hover { border-color: rgba(59,130,246,.5); box-shadow: 0 0 30px rgba(59,130,246,.12); }
+
+        /* ── Pill badges ── */
+        .badge { display:inline-block; background:rgba(59,130,246,.15); border:1px solid rgba(59,130,246,.3); color:#93c5fd; border-radius:999px; padding:2px 12px; font-size:.78rem; font-weight:600; margin:2px 3px; }
+
+        /* ── Floating CV ── */
+        .floating-cv {
+            position:fixed; bottom:2rem; right:2rem; z-index:100;
+            display:flex; align-items:center; gap:.5rem;
+            background:#2563eb; color:#fff;
+            padding:.9rem 1.4rem; border-radius:999px;
+            font-weight:700; font-size:.95rem;
+            box-shadow: 0 8px 32px rgba(37,99,235,.45);
+            border: 1px solid rgba(147,197,253,.2);
+            transition: transform .25s, background .25s;
+            text-decoration:none;
+        }
+        .floating-cv:hover { transform:scale(1.06); background:#3b82f6; }
+
+        /* ── Lang switcher ── */
+        #lang-switcher {
+            position:fixed; top:5rem; right:1rem; z-index:60;
+            background:rgba(15,23,42,.9); backdrop-filter:blur(10px);
+            border:1px solid rgba(51,65,85,.8);
+            border-radius:.75rem; padding:.4rem;
+            display:flex; flex-direction:column; gap:.25rem;
+        }
+        #lang-switcher button {
+            background:transparent; border:none; color:#cbd5e1;
+            padding:.45rem .65rem; border-radius:.5rem;
+            cursor:pointer; font-weight:700; font-size:.78rem;
+            transition:background .2s, color .2s;
+        }
+        #lang-switcher button:hover, #lang-switcher button.active { background:rgba(59,130,246,.25); color:#93c5fd; }
+
+        /* ── Nav ── */
+        nav { position:sticky; top:0; z-index:50; background:rgba(2,6,23,.85); backdrop-filter:blur(16px); border-bottom:1px solid rgba(51,65,85,.4); }
+
+        /* ── Mobile nav ── */
+        #mobile-menu { display:none; }
+        #mobile-menu.open { display:block; }
+
+        /* ── Hero image ── */
+        .hero-img {
+            width:260px; height:320px; object-fit:cover;
+            border-radius:1.5rem;
+            border:2px solid rgba(51,65,85,.6);
+            box-shadow: 0 25px 60px rgba(0,0,0,.6), 0 0 80px rgba(37,99,235,.15);
+            transition:transform .5s;
+        }
+        .hero-img:hover { transform:rotate(0deg) scale(1.03); }
+
+        /* ── Skill chips ── */
+        .skill-chip {
+            background:rgba(15,23,42,.9);
+            border:1px solid rgba(59,130,246,.25);
+            color:#94a3b8; border-radius:.6rem;
+            padding:.5rem 1rem; font-size:.85rem; font-weight:600;
+            transition:border-color .2s, color .2s;
+        }
+        .skill-chip:hover { border-color:#3b82f6; color:#e2e8f0; }
+
+        /* ── Scroll reveal ── */
+        .reveal { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+
+        /* ── Section title underline ── */
+        .section-title { position:relative; display:inline-block; }
+        .section-title::after { content:''; position:absolute; bottom:-8px; left:0; right:0; height:3px; background:linear-gradient(90deg,#3b82f6,transparent); border-radius:2px; }
     </style>
 </head>
-<body class="font-sans leading-normal tracking-normal">
+<body>
 
-    <div class="fixed top-20 right-4 z-[60] bg-slate-800/90 backdrop-blur shadow-lg rounded-xl p-2 flex flex-col gap-2 border border-slate-700">
-        <button onclick="changeLanguage('es')" class="hover:bg-slate-700 text-slate-200 p-2 rounded transition font-bold text-xs">🇪🇸 ES</button>
-        <button onclick="changeLanguage('en')" class="hover:bg-slate-700 text-slate-200 p-2 rounded transition font-bold text-xs">🇺🇸 EN</button>
-        <button onclick="changeLanguage('pt')" class="hover:bg-slate-700 text-slate-200 p-2 rounded transition font-bold text-xs">🇧🇷 PT</button>
+<!-- Starfield -->
+<div id="stars"></div>
+
+<!-- Language Switcher -->
+<div id="lang-switcher">
+    <button onclick="changeLanguage('es')" id="btn-es" class="active">🇪🇸 ES</button>
+    <button onclick="changeLanguage('en')" id="btn-en">🇺🇸 EN</button>
+    <button onclick="changeLanguage('pt')" id="btn-pt">🇧🇷 PT</button>
+</div>
+
+<!-- Floating CV Button -->
+<a href="CV-Matias-Maciel.pdf" target="_blank" class="floating-cv">
+    <i class="fas fa-file-pdf"></i>
+    <span class="lang-text" data-es="Descargar CV" data-en="Download CV" data-pt="Baixar CV">Descargar CV</span>
+</a>
+
+<!-- NAV -->
+<nav>
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl font-extrabold text-white tracking-tight" style="font-family:'Space Mono',monospace">MMG<span class="text-blue-500">.</span></a>
+        <!-- Desktop -->
+        <div class="hidden md:flex space-x-8 font-semibold text-slate-300">
+            <a href="#skills"      class="hover:text-blue-400 transition lang-text" data-es="Skills"       data-en="Skills"      data-pt="Skills">Skills</a>
+            <a href="#experiencia" class="hover:text-blue-400 transition lang-text" data-es="Experiencia"  data-en="Experience"  data-pt="Experiência">Experiencia</a>
+            <a href="#casos"       class="hover:text-blue-400 transition lang-text" data-es="Proyectos"    data-en="Projects"    data-pt="Projetos">Proyectos</a>
+            <a href="#contacto"    class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-500 transition shadow-lg shadow-blue-900/30 lang-text" data-es="Contacto" data-en="Contact" data-pt="Contato">Contacto</a>
+        </div>
+        <!-- Hamburger -->
+        <button id="hamburger" class="md:hidden text-slate-300 hover:text-white" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
+            <i class="fas fa-bars text-xl"></i>
+        </button>
     </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden border-t border-slate-800/50 px-6 py-4 flex flex-col gap-4 text-slate-300 font-semibold">
+        <a href="#skills"      onclick="document.getElementById('mobile-menu').classList.remove('open')" class="hover:text-blue-400 transition lang-text" data-es="Skills"      data-en="Skills"     data-pt="Skills">Skills</a>
+        <a href="#experiencia" onclick="document.getElementById('mobile-menu').classList.remove('open')" class="hover:text-blue-400 transition lang-text" data-es="Experiencia" data-en="Experience" data-pt="Experiência">Experiencia</a>
+        <a href="#casos"       onclick="document.getElementById('mobile-menu').classList.remove('open')" class="hover:text-blue-400 transition lang-text" data-es="Proyectos"   data-en="Projects"   data-pt="Projetos">Proyectos</a>
+        <a href="#contacto"    onclick="document.getElementById('mobile-menu').classList.remove('open')" class="text-blue-400 lang-text" data-es="Contacto" data-en="Contact" data-pt="Contato">Contacto</a>
+    </div>
+</nav>
 
-    <a href="CV-Matias-Maciel.pdf" target="_blank" class="floating-cv bg-blue-600 text-white p-4 rounded-full shadow-2xl shadow-blue-900/50 flex items-center justify-center hover:bg-blue-500 border border-blue-400/20">
-        <i class="fas fa-file-pdf mr-2 text-xl"></i>
-        <span class="font-bold pr-2 lang-text" data-es="Descargar CV" data-en="Download CV" data-pt="Baixar CV">Descargar CV</span>
-    </a>
+<!-- ══════════════ HERO ══════════════ -->
+<header class="container mx-auto px-6 py-20 md:py-32 flex flex-col md:flex-row items-center gap-12 relative z-10">
+    <div class="md:w-2/3 text-center md:text-left">
+        <p class="text-blue-400 font-bold tracking-[.25em] uppercase text-sm mb-4" style="font-family:'Space Mono',monospace">IAM &amp; Cybersecurity</p>
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-4 text-white tracking-tight leading-none">
+            Matias<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-500">Maciel Gabriel</span>
+        </h1>
+        <h2 class="text-xl md:text-2xl text-slate-400 font-semibold mb-8" style="font-family:'Space Mono',monospace">Identity &amp; Access Management Specialist</h2>
+        <p class="text-base text-slate-400 mb-10 max-w-xl leading-relaxed lang-text"
+           data-es="Especialista en IAM & CyberSecurity. Enfocado en entornos críticos, estrategias Zero Trust y gestión avanzada de movilidad empresarial (Android/iOS)."
+           data-en="IAM & CyberSecurity Specialist. Focused on critical environments, Zero Trust strategies, and advanced enterprise mobility management (Android/iOS)."
+           data-pt="Especialista em IAM & CyberSecurity. Focado em ambientes críticos, estratégias Zero Trust e gestão avançada de mobilidade empresarial (Android/iOS).">
+        </p>
+        <div class="flex flex-wrap justify-center md:justify-start gap-4">
+            <a href="#casos" class="bg-blue-600 text-white px-7 py-3.5 rounded-xl text-base font-bold shadow-lg shadow-blue-900/40 hover:bg-blue-500 transition lang-text" data-es="Ver Proyectos" data-en="View Projects" data-pt="Ver Projetos"></a>
+            <a href="#experiencia" class="border border-slate-700 text-slate-300 px-7 py-3.5 rounded-xl text-base font-bold hover:bg-slate-800/60 hover:text-white transition lang-text" data-es="Trayectoria" data-en="Trajectory" data-pt="Trajetória"></a>
+        </div>
+    </div>
+    <div class="md:w-1/3 flex justify-center relative">
+        <div class="absolute inset-0 bg-blue-600/20 blur-[80px] rounded-full scale-75"></div>
+        <img src="CV foto.jpg" alt="Matias Maciel Gabriel"
+             class="hero-img relative z-10"
+             style="transform:rotate(2deg)"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <!-- Fallback avatar si no carga la foto -->
+        <div style="display:none; width:260px; height:320px; background:linear-gradient(135deg,#1e3a8a,#312e81); border-radius:1.5rem; align-items:center; justify-content:center; border:2px solid rgba(51,65,85,.6);" class="relative z-10">
+            <i class="fas fa-user text-7xl text-blue-400/60"></i>
+        </div>
+    </div>
+</header>
 
-    <nav class="bg-slate-950/80 backdrop-blur-md border-b border-slate-800/50 sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-extrabold text-white tracking-tight">MMG<span class="text-blue-500">.</span></a>
-            <div class="hidden md:flex space-x-8 font-medium text-slate-300">
-                <a href="#experiencia" class="hover:text-blue-400 transition lang-text" data-es="Experiencia" data-en="Experience" data-pt="Experiência">Experiencia</a>
-                <a href="#casos" class="hover:text-blue-400 transition lang-text" data-es="Casos de Éxito" data-en="Success Cases" data-pt="Casos de Sucesso">Casos de Éxito</a>
-                <a href="#contacto" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-500 transition shadow-lg shadow-blue-900/30 lang-text" data-es="Contacto" data-en="Contact" data-pt="Contato">Contacto</a>
+<!-- ══════════════ SKILLS ══════════════ -->
+<section id="skills" class="py-20 relative z-10">
+    <div class="container mx-auto px-6">
+        <h2 class="text-2xl font-bold mb-12 text-center text-white uppercase tracking-widest section-title mx-auto block w-fit lang-text"
+            data-es="Stack Técnico" data-en="Tech Stack" data-pt="Stack Técnico"></h2>
+
+        <div class="max-w-4xl mx-auto space-y-8 reveal">
+            <!-- Row 1 -->
+            <div>
+                <p class="text-xs text-blue-400 font-bold tracking-widest uppercase mb-3" style="font-family:'Space Mono',monospace">Identity & Access</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-chip">Microsoft Entra ID / Azure AD</span>
+                    <span class="skill-chip">SailPoint IdentityNow</span>
+                    <span class="skill-chip">Active Directory</span>
+                    <span class="skill-chip">Privileged Access Mgmt</span>
+                    <span class="skill-chip">RBAC / ABAC</span>
+                    <span class="skill-chip">SSO / SAML / OAuth</span>
+                </div>
+            </div>
+            <!-- Row 2 -->
+            <div>
+                <p class="text-xs text-blue-400 font-bold tracking-widest uppercase mb-3" style="font-family:'Space Mono',monospace">Security & Compliance</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-chip">Zero Trust Architecture</span>
+                    <span class="skill-chip">Conditional Access</span>
+                    <span class="skill-chip">Microsoft Intune / MDM</span>
+                    <span class="skill-chip">MAM-WE / DLP</span>
+                    <span class="skill-chip">CyberSecurity Audits</span>
+                    <span class="skill-chip">Risk Governance</span>
+                </div>
+            </div>
+            <!-- Row 3 -->
+            <div>
+                <p class="text-xs text-blue-400 font-bold tracking-widest uppercase mb-3" style="font-family:'Space Mono',monospace">Platforms & Tools</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-chip">Microsoft 365 Enterprise</span>
+                    <span class="skill-chip">ServiceNow</span>
+                    <span class="skill-chip">VMware / Hyper-V / Citrix</span>
+                    <span class="skill-chip">AirWatch / Workspace ONE</span>
+                    <span class="skill-chip">Google Workspace</span>
+                    <span class="skill-chip">IBM Notes & Domino</span>
+                </div>
             </div>
         </div>
-    </nav>
+    </div>
+</section>
 
-    <header class="container mx-auto px-6 py-20 md:py-32 flex flex-col md:flex-row items-center">
-        <div class="md:w-2/3 text-center md:text-left z-10">
-            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 text-white tracking-tight">
-                Matias <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">Maciel Gabriel</span>
-            </h1>
-            <h2 class="text-xl md:text-3xl text-blue-300 font-semibold mb-6">Identity & Access Management Specialist</h2>
-            <p class="text-lg text-slate-400 mb-10 max-w-2xl leading-relaxed lang-text" 
-               data-es="Especialista en IAM & CyberSecurity. Enfocado en entornos críticos, estrategias Zero Trust y gestión avanzada de movilidad empresarial (Android/iOS)."
-               data-en="IAM & CyberSecurity Specialist. Focused on critical environments, Zero Trust strategies, and advanced enterprise mobility management (Android/iOS)."
-               data-pt="Especialista em IAM & CyberSecurity. Focado em ambientes críticos, estratégias Zero Trust e gestão avançada de mobilidade empresarial (Android/iOS).">
-               Especialista en IAM & CyberSecurity. Enfocado en entornos críticos, estrategias Zero Trust y gestión avanzada de movilidad empresarial (Android/iOS).
-            </p>
-            <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                <a href="#casos" class="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg shadow-blue-900/40 hover:bg-blue-500 transition lang-text" data-es="Ver Proyectos" data-en="View Projects" data-pt="Ver Projetos">Ver Proyectos</a>
-                <a href="#experiencia" class="border-2 border-slate-700 text-slate-300 px-8 py-4 rounded-xl text-lg font-bold hover:bg-slate-800 hover:text-white transition lang-text" data-es="Trayectoria" data-en="Trajectory" data-pt="Trajetória">Trayectoria</a>
-            </div>
-        </div>
-        <div class="md:w-1/3 mt-16 md:mt-0 flex justify-center z-10">
-            <div class="absolute w-64 h-80 bg-blue-600/30 blur-[100px] -z-10 rounded-full"></div>
-            <img src="CV foto.jpg" alt="Matias Maciel Gabriel" class="w-72 h-auto object-cover rounded-3xl shadow-2xl border-2 border-slate-700/50 rotate-3 hover:rotate-0 transition duration-500">
-        </div>
-    </header>
+<!-- ══════════════ CASOS DE ÉXITO ══════════════ -->
+<section id="casos" class="py-24 relative z-10">
+    <div class="container mx-auto px-6">
+        <h2 class="text-2xl font-bold mb-16 text-center text-white uppercase tracking-widest section-title mx-auto block w-fit lang-text"
+            data-es="Casos de Éxito" data-en="Success Cases" data-pt="Casos de Sucesso"></h2>
 
-    <section id="casos" class="py-24 bg-slate-900/50 relative">
-        <div class="container mx-auto px-6 relative z-10">
-            <h2 class="text-3xl font-bold mb-16 text-center text-white uppercase tracking-widest lang-text" data-es="Casos de Éxito" data-en="Success Cases" data-pt="Casos de Sucesso">Casos de Éxito</h2>
-            <div class="max-w-5xl mx-auto bg-slate-800/80 backdrop-blur p-10 rounded-[2rem] shadow-2xl border border-slate-700">
-                <div class="flex items-center mb-10 border-b border-slate-700 pb-8">
-                    <div class="bg-blue-900/50 p-5 rounded-2xl mr-6 border border-blue-500/30"><i class="fas fa-shield-halved text-4xl text-blue-400"></i></div>
+        <div class="max-w-5xl mx-auto reveal">
+            <div class="bg-slate-900/70 backdrop-blur border border-slate-700/60 rounded-3xl p-8 md:p-12 shadow-2xl">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5 mb-10 pb-8 border-b border-slate-700/60">
+                    <div class="bg-blue-900/40 p-4 rounded-2xl border border-blue-500/20 flex-shrink-0">
+                        <i class="fas fa-shield-halved text-4xl text-blue-400"></i>
+                    </div>
                     <div>
-                        <h3 class="text-3xl font-bold text-white uppercase mb-2">Zero Trust Implementation</h3>
-                        <p class="text-blue-400 font-bold tracking-wider text-lg">Devices Pillar - BYOD Project & M365 Ecosystem</p>
+                        <h3 class="text-2xl font-extrabold text-white uppercase mb-1">Zero Trust Implementation</h3>
+                        <p class="text-blue-400 font-semibold tracking-wide">Devices Pillar — BYOD Project &amp; M365 Ecosystem</p>
+                        <div class="mt-2 flex flex-wrap gap-1">
+                            <span class="badge">Microsoft Intune</span>
+                            <span class="badge">Conditional Access</span>
+                            <span class="badge">MAM-WE</span>
+                            <span class="badge">Entra ID</span>
+                        </div>
                     </div>
                 </div>
-                <div class="grid md:grid-cols-2 gap-10 lang-text text-slate-300" 
-                     data-es="<div><h4 class='font-bold text-white text-xl mb-4'>Arquitectura:</h4><ul class='space-y-3'><li class='flex items-start'><i class='fas fa-check text-blue-500 mt-1 mr-2'></i>Ecosistema Microsoft 365 con licenciamiento Enterprise.</li><li class='flex items-start'><i class='fas fa-check text-blue-500 mt-1 mr-2'></i>Diseño de UX en In Company Portal para enrolamiento fluido.</li><li class='flex items-start'><i class='fas fa-check text-blue-500 mt-1 mr-2'></i>Políticas de Acceso Condicional basadas en riesgo.</li></ul></div><div><h4 class='font-bold text-white text-xl mb-4'>Nivel de Madurez Avanzado:</h4><ul class='space-y-3'><li class='flex items-start'><i class='fas fa-shield-alt text-blue-500 mt-1 mr-2'></i>Validación de Compliance y salud del dispositivo pre-acceso.</li><li class='flex items-start'><i class='fas fa-shield-alt text-blue-500 mt-1 mr-2'></i>Protección MAM-WE (DLP sin gestión total del dispositivo).</li><li class='flex items-start'><i class='fas fa-shield-alt text-blue-500 mt-1 mr-2'></i>Aislamiento estricto de entorno personal vs. corporativo.</li></ul></div>"
-                     data-en="<div><h4 class='font-bold text-white text-xl mb-4'>Architecture:</h4><ul class='space-y-3'><li class='flex items-start'><i class='fas fa-check text-blue-500 mt-1 mr-2'></i>Microsoft 365 Ecosystem with Enterprise licensing.</li><li class='flex items-start'><i class='fas fa-check text-blue-500 mt-1 mr-2'></i>UX Design for In Company Portal seamless enrollment.</li><li class='flex items-start'><i class='fas fa-check text-blue-500 mt-1 mr-2'></i>Risk-based Conditional Access Policies.</li></ul></div><div><h4 class='font-bold text-white text-xl mb-4'>Advanced Maturity Level:</h4><ul class='space-y-3'><li class='flex items-start'><i class='fas fa-shield-alt text-blue-500 mt-1 mr-2'></i>Compliance Validation & device health check pre-access.</li><li class='flex items-start'><i class='fas fa-shield-alt text-blue-500 mt-1 mr-2'></i>MAM-WE Protection (DLP without full device management).</li><li class='flex items-start'><i class='fas fa-shield-alt text-blue-500 mt-1 mr-2'></i>Strict isolation of personal vs. corporate environment.</li></ul></div>"
-                     data-pt="<div><h4 class='font-bold text-white text-xl mb-4'>Arquitetura:</h4><ul class='space-y-3'><li class='flex items-start'><i class='fas fa-check text-blue-500 mt-1 mr-2'></i>Ecossistema Microsoft 365 com licenciamento Enterprise.</li><li class='flex items-start'><i class='fas fa-check text-blue-500 mt-1 mr-2'></i>Design de UX no In Company Portal para registro fluido.</li><li class='flex items-start'><i class='fas fa-check text-blue-500 mt-1 mr-2'></i>Políticas de Acesso Condicional baseadas em risco.</li></ul></div><div><h4 class='font-bold text-white text-xl mb-4'>Nível de Maturidade Avançado:</h4><ul class='space-y-3'><li class='flex items-start'><i class='fas fa-shield-alt text-blue-500 mt-1 mr-2'></i>Validação de Compliance e saúde do dispositivo pré-acesso.</li><li class='flex items-start'><i class='fas fa-shield-alt text-blue-500 mt-1 mr-2'></i>Proteção MAM-WE (DLP sem gestão total do dispositivo).</li><li class='flex items-start'><i class='fas fa-shield-alt text-blue-500 mt-1 mr-2'></i>Isolamento estrito de ambiente pessoal vs. corporativo.</li></ul></div>">
+
+                <div class="grid md:grid-cols-2 gap-8 text-slate-300">
+                    <!-- col 1 -->
+                    <div class="lang-text"
+                         data-es="<h4 class='font-bold text-white text-lg mb-4'>Arquitectura</h4><ul class='space-y-3'><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>Ecosistema Microsoft 365 con licenciamiento Enterprise.</span></li><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>Diseño de UX en In Company Portal para enrolamiento fluido.</span></li><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>Políticas de Acceso Condicional basadas en riesgo.</span></li></ul>"
+                         data-en="<h4 class='font-bold text-white text-lg mb-4'>Architecture</h4><ul class='space-y-3'><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>Microsoft 365 Ecosystem with Enterprise licensing.</span></li><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>UX Design for In Company Portal seamless enrollment.</span></li><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>Risk-based Conditional Access Policies.</span></li></ul>"
+                         data-pt="<h4 class='font-bold text-white text-lg mb-4'>Arquitetura</h4><ul class='space-y-3'><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>Ecossistema Microsoft 365 com licenciamento Enterprise.</span></li><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>Design de UX no In Company Portal para registro fluido.</span></li><li class='flex items-start gap-3'><i class='fas fa-check text-blue-500 mt-0.5 flex-shrink-0'></i><span>Políticas de Acesso Condicional baseadas em risco.</span></li></ul>">
+                    </div>
+                    <!-- col 2 -->
+                    <div class="lang-text"
+                         data-es="<h4 class='font-bold text-white text-lg mb-4'>Nivel de Madurez Avanzado</h4><ul class='space-y-3'><li class='flex items-start gap-3'><i class='fas fa-shield-alt text-blue-500 mt-0.5 flex-shrink-0'></i><span>Validación de Compliance y salud del dispositivo pre-acceso.</span></li><li class='flex items-start gap-3'><i class='fas fa-shield-alt text-blue-500 mt-0.5 flex-shrink-0'></i><span>Protección MAM-WE (DLP sin gestión total del dispositivo).</span></li><li class='flex items-start gap-3'><i class='fas fa-shield-alt text-blue-500 mt-0.5 flex-shrink-0'></i><span>Aislamiento estricto de entorno personal vs. corporativo.</span></li></ul>"
+                         data-en="<h4 class='font-bold text-white text-lg mb-4'>Advanced Maturity Level</h4><ul class='space-y-3'><li class='flex items-start gap-3'><i class='fas fa-shield-alt text-blue-500 mt-0.5 flex-shrink-0'></i><span>Compliance Validation &amp; device health check pre-access.</span></li><li class='flex items-start gap-3'><i class='fas fa-shield-alt text-blue-500 mt-0.5 flex-shrink-0'></i><span>MAM-WE Protection (DLP without full device management).</span></li><li class='flex items-start gap-3'><i class='fas fa-shield-alt text-blue-500 mt-0.5 flex-shrink-0'></i><span>Strict isolation of personal vs. corporate environment.</span></li></ul>"
+                         data-pt="<h4 class='font-bold text-white text-lg mb-4'>Nível de Maturidade Avançado</h4><ul class='space-y-3'><li class='flex items-start gap-3'><i class='fas fa-shield-alt text-blue-500 mt-0.5 flex-shrink-0'></i><span>Validação de Compliance e saúde do dispositivo pré-acesso.</span></li><li class='flex items-start gap-3'><i class='fas fa-shield-alt text-blue-500 mt-0.5 flex-shrink-0'></i><span>Proteção MAM-WE (DLP sem gestão total do dispositivo).</span></li><li class='flex items-start gap-3'><i class='fas fa-shield-alt text-blue-500 mt-0.5 flex-shrink-0'></i><span>Isolamento estrito de ambiente pessoal vs. corporativo.</span></li></ul>">
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="experiencia" class="py-24 relative">
-        <div class="container mx-auto px-6 relative z-10">
-            <h2 class="text-3xl font-bold mb-20 text-center text-white uppercase tracking-widest lang-text" data-es="Experiencia Profesional" data-en="Professional Experience" data-pt="Experiência Profissional">Experiencia Profesional</h2>
-            
-            <div class="relative timeline-line">
-                
-                <div class="mb-16 flex flex-col md:flex-row items-center w-full">
-                    <div class="hidden md:block w-1/2 pr-10 text-right font-bold text-blue-400 text-lg">04/2023 – Present</div>
-                    <div class="z-10 bg-blue-600 w-8 h-8 rounded-full border-4 border-slate-900 shadow-lg shadow-blue-500/50"></div>
-                    <div class="w-full md:w-1/2 md:pl-10 mt-6 md:mt-0">
-                        <div class="bg-slate-800/80 backdrop-blur p-8 rounded-2xl border border-slate-700 shadow-lg hover:border-blue-500/50 transition duration-300 lang-text"
-                             data-es="<h3 class='font-bold text-2xl text-white'>Citibank</h3><p class='text-blue-400 font-bold mb-4'>Project Management & Risk Governance</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>Soporte técnico Tier 3 para aplicaciones de misión crítica.</li><li>Entrega end-to-end de proyectos de migración GIAM.</li><li>Gestión de riesgos y documentación de controles IAM para auditorías de Ciberseguridad.</li><li>Automatización de flujos operativos y mejora continua.</li></ul>"
-                             data-en="<h3 class='font-bold text-2xl text-white'>Citibank</h3><p class='text-blue-400 font-bold mb-4'>Project Management & Risk Governance</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>Tier 3 technical advisory for mission-critical applications.</li><li>End-to-end delivery of complex GIAM migration projects.</li><li>Risk management and audit-ready documentation for CyberSecurity IAM standards.</li><li>Operational workflow optimization and automation.</li></ul>"
-                             data-pt="<h3 class='font-bold text-2xl text-white'>Citibank</h3><p class='text-blue-400 font-bold mb-4'>Project Management & Risk Governance</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>Consultoria técnica Tier 3 para aplicações de missão crítica.</li><li>Entrega end-to-end de projetos de migração GIAM.</li><li>Gestão de riscos e documentação de controles IAM para auditorias de Cibersegurança.</li><li>Automação de fluxos operacionais e melhoria contínua.</li></ul>">
-                        </div>
-                    </div>
+<!-- ══════════════ EXPERIENCIA ══════════════ -->
+<section id="experiencia" class="py-24 relative z-10">
+    <div class="container mx-auto px-6">
+        <h2 class="text-2xl font-bold mb-20 text-center text-white uppercase tracking-widest section-title mx-auto block w-fit lang-text"
+            data-es="Experiencia Profesional" data-en="Professional Experience" data-pt="Experiência Profissional"></h2>
+
+        <div class="max-w-5xl mx-auto timeline-wrapper">
+
+            <!-- Citibank -->
+            <div class="tl-item reveal">
+                <div class="tl-date">04/2023 – Present</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card lang-text"
+                     data-es="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>04/2023 – Presente</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>Citibank</h3><p class='text-blue-400 font-semibold text-sm mb-4'>Project Management &amp; Risk Governance</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Soporte técnico Tier 3 para aplicaciones de misión crítica.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Entrega end-to-end de proyectos de migración GIAM.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Gestión de riesgos y documentación de controles IAM para auditorías de Ciberseguridad.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Automatización de flujos operativos y mejora continua.</li></ul>"
+                     data-en="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>04/2023 – Present</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>Citibank</h3><p class='text-blue-400 font-semibold text-sm mb-4'>Project Management &amp; Risk Governance</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Tier 3 technical advisory for mission-critical applications.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>End-to-end delivery of complex GIAM migration projects.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Risk management and audit-ready documentation for CyberSecurity IAM standards.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Operational workflow optimization and automation.</li></ul>"
+                     data-pt="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>04/2023 – Presente</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>Citibank</h3><p class='text-blue-400 font-semibold text-sm mb-4'>Project Management &amp; Risk Governance</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Consultoria técnica Tier 3 para aplicações de missão crítica.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Entrega end-to-end de projetos de migração GIAM.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Gestão de riscos e documentação de controles IAM para auditorias de Cibersegurança.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Automação de fluxos operacionais e melhoria contínua.</li></ul>">
                 </div>
-
-                <div class="mb-16 flex flex-col md:flex-row items-center w-full">
-                    <div class="hidden md:block w-1/2 pr-10 text-right font-bold text-blue-400 text-lg">02/2021 – 04/2023</div>
-                    <div class="z-10 bg-blue-600 w-8 h-8 rounded-full border-4 border-slate-900 shadow-lg shadow-blue-500/50"></div>
-                    <div class="w-full md:w-1/2 md:pl-10 mt-6 md:mt-0">
-                        <div class="bg-slate-800/80 backdrop-blur p-8 rounded-2xl border border-slate-700 shadow-lg hover:border-blue-500/50 transition duration-300 lang-text"
-                             data-es="<h3 class='font-bold text-2xl text-white'>EY GDS</h3><p class='text-blue-400 font-bold mb-4'>Senior Sec Admin L3 IAM</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>Ingeniería de soluciones SailPoint (lógica custom, grupos dinámicos/estáticos).</li><li>Arquitectura de File Servers Globales, ACLs y jerarquías de permisos.</li><li>Administración de Active Directory en entornos de Prod/Test/Dev.</li><li>Resolución de incidentes IAM complejos en ServiceNow.</li></ul>"
-                             data-en="<h3 class='font-bold text-2xl text-white'>EY GDS</h3><p class='text-blue-400 font-bold mb-4'>Senior Sec Admin L3 IAM</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>Engineering SailPoint solutions (custom logic, static/dynamic groups).</li><li>Architecting Global File Server structures, ACLs, and permission hierarchies.</li><li>Active Directory administration across Prod/Test/Dev environments.</li><li>Complex IAM incident resolution within ServiceNow.</li></ul>"
-                             data-pt="<h3 class='font-bold text-2xl text-white'>EY GDS</h3><p class='text-blue-400 font-bold mb-4'>Senior Sec Admin L3 IAM</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>Engenharia de soluções SailPoint (lógica custom, grupos dinâmicos/estáticos).</li><li>Arquitetura de File Servers Globais, ACLs e hierarquias de permissões.</li><li>Administração de Active Directory em ambientes de Prod/Teste/Dev.</li><li>Resolução de incidentes IAM complexos no ServiceNow.</li></ul>">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mb-16 flex flex-col md:flex-row items-center w-full">
-                    <div class="hidden md:block w-1/2 pr-10 text-right font-bold text-blue-400 text-lg">09/2020 – 02/2021</div>
-                    <div class="z-10 bg-blue-600 w-8 h-8 rounded-full border-4 border-slate-900 shadow-lg shadow-blue-500/50"></div>
-                    <div class="w-full md:w-1/2 md:pl-10 mt-6 md:mt-0">
-                        <div class="bg-slate-800/80 backdrop-blur p-8 rounded-2xl border border-slate-700 shadow-lg hover:border-blue-500/50 transition duration-300 lang-text"
-                             data-es="<h3 class='font-bold text-2xl text-white'>DXC Technology</h3><p class='text-blue-400 font-bold mb-4'>Info Sec Analyst L2 (Cliente: Vale)</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>Gestión de cuentas privilegiadas y estándar mediante atributos de AD.</li><li>Administración de File Server access y Exchange (EAC).</li><li>Sincronización entre Active Directory y entornos Outlook / Office 365.</li></ul>"
-                             data-en="<h3 class='font-bold text-2xl text-white'>DXC Technology</h3><p class='text-blue-400 font-bold mb-4'>Info Sec Analyst L2 (Client: Vale)</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>Managed privileged and standard accounts via AD attributes definition.</li><li>File server folder access and Exchange (EAC) administration.</li><li>Synchronization between Active Directory and Outlook / Office 365 environments.</li></ul>"
-                             data-pt="<h3 class='font-bold text-2xl text-white'>DXC Technology</h3><p class='text-blue-400 font-bold mb-4'>Info Sec Analyst L2 (Cliente: Vale)</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>Gestão de contas privilegiadas e padrão via definição de atributos de AD.</li><li>Administração de acesso a File Server e Exchange (EAC).</li><li>Sincronização entre Active Directory e ambientes Outlook / Office 365.</li></ul>">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mb-16 flex flex-col md:flex-row items-center w-full">
-                    <div class="hidden md:block w-1/2 pr-10 text-right font-bold text-blue-400 text-lg">08/2018 – 09/2020</div>
-                    <div class="z-10 bg-blue-600 w-8 h-8 rounded-full border-4 border-slate-900 shadow-lg shadow-blue-500/50"></div>
-                    <div class="w-full md:w-1/2 md:pl-10 mt-6 md:mt-0">
-                        <div class="bg-slate-800/80 backdrop-blur p-8 rounded-2xl border border-slate-700 shadow-lg hover:border-blue-500/50 transition duration-300 lang-text"
-                             data-es="<h3 class='font-bold text-2xl text-white'>PwC</h3><p class='text-blue-400 font-bold mb-4'>IAM Analyst (Global Support)</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>Gestión de estructuras de Identidad complejas en Active Directory y ONE AD.</li><li>Administración de ciclo de vida en GCP (Google Admin Console).</li><li>Identity Lifecycle Management vía SailPoint (bajas automatizadas).</li><li>Administración de bases de datos IBM Notes y Domino.</li></ul>"
-                             data-en="<h3 class='font-bold text-2xl text-white'>PwC</h3><p class='text-blue-400 font-bold mb-4'>IAM Analyst (Global Support)</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>Managing complex Identity structures within Active Directory and ONE AD.</li><li>GCP lifecycle operations (Google Admin Console).</li><li>Identity Lifecycle Management via SailPoint (automated terminations).</li><li>IBM Notes and Domino database administration.</li></ul>"
-                             data-pt="<h3 class='font-bold text-2xl text-white'>PwC</h3><p class='text-blue-400 font-bold mb-4'>IAM Analyst (Global Support)</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>Gestão de estruturas de Identidade complexas no Active Directory e ONE AD.</li><li>Operações de ciclo de vida no GCP (Google Admin Console).</li><li>Identity Lifecycle Management via SailPoint (desligamentos automatizados).</li><li>Administração de banco de dados IBM Notes e Domino.</li></ul>">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mb-16 flex flex-col md:flex-row items-center w-full">
-                    <div class="hidden md:block w-1/2 pr-10 text-right font-bold text-blue-400 text-lg">09/2017 – 07/2018</div>
-                    <div class="z-10 bg-blue-600 w-8 h-8 rounded-full border-4 border-slate-900 shadow-lg shadow-blue-500/50"></div>
-                    <div class="w-full md:w-1/2 md:pl-10 mt-6 md:mt-0">
-                        <div class="bg-slate-800/80 backdrop-blur p-8 rounded-2xl border border-slate-700 shadow-lg hover:border-blue-500/50 transition duration-300 lang-text"
-                             data-es="<h3 class='font-bold text-2xl text-white'>Siegwerk</h3><p class='text-blue-400 font-bold mb-4'>IT Infrastructure Administrator (LATAM)</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>Administración de entornos híbridos y soporte L2/L3 regional.</li><li>Virtualización (VMware, Hyper-V, Citrix).</li><li>Despliegue de MDM vía AirWatch (Workspace ONE) para Android/iOS.</li><li>Core Team Member en migración de Datacenter (Brasil).</li><li>Operaciones de Datacenter y gestión de Backup.</li></ul>"
-                             data-en="<h3 class='font-bold text-2xl text-white'>Siegwerk</h3><p class='text-blue-400 font-bold mb-4'>IT Infrastructure Administrator (LATAM)</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>High-availability hybrid environment administration & L2/L3 regional support.</li><li>Virtualization (VMware, Hyper-V, Citrix).</li><li>MDM deployment via AirWatch (Workspace ONE) for Android/iOS.</li><li>Core Team Member in Data Center Infrastructure Migration (Brazil).</li><li>Datacenter operations and Backup management.</li></ul>"
-                             data-pt="<h3 class='font-bold text-2xl text-white'>Siegwerk</h3><p class='text-blue-400 font-bold mb-4'>IT Infrastructure Administrator (LATAM)</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>Administração de ambientes híbridos e suporte L2/L3 regional.</li><li>Virtualização (VMware, Hyper-V, Citrix).</li><li>Implantação de MDM via AirWatch (Workspace ONE) para Android/iOS.</li><li>Membro do Core Team na migração de Datacenter (Brasil).</li><li>Operações de Datacenter e gestão de Backup.</li></ul>">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mb-16 flex flex-col md:flex-row items-center w-full">
-                    <div class="hidden md:block w-1/2 pr-10 text-right font-bold text-blue-400 text-lg">04/2017 – 09/2017</div>
-                    <div class="z-10 bg-blue-600 w-8 h-8 rounded-full border-4 border-slate-900 shadow-lg shadow-blue-500/50"></div>
-                    <div class="w-full md:w-1/2 md:pl-10 mt-6 md:mt-0">
-                        <div class="bg-slate-800/80 backdrop-blur p-8 rounded-2xl border border-slate-700 shadow-lg hover:border-blue-500/50 transition duration-300 lang-text"
-                             data-es="<h3 class='font-bold text-2xl text-white'>PepsiCo</h3><p class='text-blue-400 font-bold mb-4'>IT Support Specialist</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>Soporte técnico On-site y remoto.</li><li>Despliegue y configuración de workstations y periféricos.</li><li>Soporte VIP y white-glove para ejecutivos C-level.</li><li>Gestión de infraestructura de salas de VC/AV.</li></ul>"
-                             data-en="<h3 class='font-bold text-2xl text-white'>PepsiCo</h3><p class='text-blue-400 font-bold mb-4'>IT Support Specialist</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>On-site and remote technical assistance.</li><li>Deployment and configuration of workstations and peripherals.</li><li>VIP and 'white-glove' support for C-level executives.</li><li>VC room infrastructure and AV management.</li></ul>"
-                             data-pt="<h3 class='font-bold text-2xl text-white'>PepsiCo</h3><p class='text-blue-400 font-bold mb-4'>IT Support Specialist</p><ul class='text-slate-300 text-sm space-y-2 list-disc ml-4'><li>Suporte técnico On-site e remoto.</li><li>Implantação e configuração de workstations e periféricos.</li><li>Suporte VIP e 'white-glove' para executivos C-level.</li><li>Gestão de infraestrutura de salas de VC/AV.</li></ul>">
-                        </div>
-                    </div>
-                </div>
-
             </div>
-        </div>
-    </section>
 
-    <footer id="contacto" class="bg-black/30 py-16 text-center border-t border-slate-800/50 relative z-10">
-        <h2 class="text-3xl font-bold mb-6 text-white lang-text" data-es="¿Conectamos?" data-en="Let's Connect" data-pt="Vamos Conectar?">¿Conectamos?</h2>
-        <div class="flex justify-center space-x-8 text-4xl mb-10">
-            <a href="https://www.linkedin.com/in/matiasgmaciel/" target="_blank" class="text-slate-400 hover:text-blue-400 transition transform hover:scale-110"><i class="fab fa-linkedin"></i></a>
-            <a href="MattMMG.github.io" target="_blank" class="text-slate-400 hover:text-blue-400 transition transform hover:scale-110"><i class="fab fa-github"></i></a>
-            <a href="mailto:mati.maciel7@gmail.com" class="text-slate-400 hover:text-blue-400 transition transform hover:scale-110"><i class="fas fa-envelope"></i></a>
-        </div>
-        <p class="text-slate-500 text-sm uppercase tracking-widest">© 2026 Matias Maciel Gabriel | Zero Trust Advocate</p>
-    </footer>
+            <!-- EY -->
+            <div class="tl-item reveal">
+                <div class="tl-date">02/2021 – 04/2023</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card lang-text"
+                     data-es="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>02/2021 – 04/2023</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>EY GDS</h3><p class='text-blue-400 font-semibold text-sm mb-4'>Senior Sec Admin L3 IAM</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Ingeniería de soluciones SailPoint (lógica custom, grupos dinámicos/estáticos).</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Arquitectura de File Servers Globales, ACLs y jerarquías de permisos.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Administración de Active Directory en entornos de Prod/Test/Dev.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Resolución de incidentes IAM complejos en ServiceNow.</li></ul>"
+                     data-en="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>02/2021 – 04/2023</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>EY GDS</h3><p class='text-blue-400 font-semibold text-sm mb-4'>Senior Sec Admin L3 IAM</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Engineering SailPoint solutions (custom logic, static/dynamic groups).</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Architecting Global File Server structures, ACLs, and permission hierarchies.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Active Directory administration across Prod/Test/Dev environments.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Complex IAM incident resolution within ServiceNow.</li></ul>"
+                     data-pt="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>02/2021 – 04/2023</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>EY GDS</h3><p class='text-blue-400 font-semibold text-sm mb-4'>Senior Sec Admin L3 IAM</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Engenharia de soluções SailPoint (lógica custom, grupos dinâmicos/estáticos).</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Arquitetura de File Servers Globais, ACLs e hierarquias de permissões.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Administração de Active Directory em ambientes de Prod/Teste/Dev.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Resolução de incidentes IAM complexos no ServiceNow.</li></ul>">
+                </div>
+            </div>
 
-    <script>
-        // Función de traducción optimizada
-        function changeLanguage(lang) {
-            document.querySelectorAll('.lang-text').forEach(el => {
-                // Si el elemento tiene HTML interno (como las listas de experiencia), usamos innerHTML
-                if (el.innerHTML.includes('<')) {
-                     el.innerHTML = el.getAttribute('data-' + lang);
-                } else {
-                    // Si es solo texto plano, usamos textContent por rendimiento
-                     el.textContent = el.getAttribute('data-' + lang);
-                }
-            });
+            <!-- DXC -->
+            <div class="tl-item reveal">
+                <div class="tl-date">09/2020 – 02/2021</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card lang-text"
+                     data-es="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>09/2020 – 02/2021</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>DXC Technology</h3><p class='text-blue-400 font-semibold text-sm mb-4'>Info Sec Analyst L2 — Cliente: Vale</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Gestión de cuentas privilegiadas y estándar mediante atributos de AD.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Administración de File Server access y Exchange (EAC).</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Sincronización entre Active Directory y entornos Outlook / Office 365.</li></ul>"
+                     data-en="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>09/2020 – 02/2021</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>DXC Technology</h3><p class='text-blue-400 font-semibold text-sm mb-4'>Info Sec Analyst L2 — Client: Vale</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Managed privileged and standard accounts via AD attributes definition.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>File server folder access and Exchange (EAC) administration.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Synchronization between Active Directory and Outlook / Office 365 environments.</li></ul>"
+                     data-pt="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>09/2020 – 02/2021</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>DXC Technology</h3><p class='text-blue-400 font-semibold text-sm mb-4'>Info Sec Analyst L2 — Cliente: Vale</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Gestão de contas privilegiadas e padrão via definição de atributos de AD.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Administração de acesso a File Server e Exchange (EAC).</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Sincronização entre Active Directory e ambientes Outlook / Office 365.</li></ul>">
+                </div>
+            </div>
+
+            <!-- PwC -->
+            <div class="tl-item reveal">
+                <div class="tl-date">08/2018 – 09/2020</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card lang-text"
+                     data-es="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>08/2018 – 09/2020</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>PwC</h3><p class='text-blue-400 font-semibold text-sm mb-4'>IAM Analyst — Global Support</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Gestión de estructuras de Identidad complejas en Active Directory y ONE AD.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Administración de ciclo de vida en GCP (Google Admin Console).</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Identity Lifecycle Management vía SailPoint (bajas automatizadas).</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Administración de bases de datos IBM Notes y Domino.</li></ul>"
+                     data-en="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>08/2018 – 09/2020</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>PwC</h3><p class='text-blue-400 font-semibold text-sm mb-4'>IAM Analyst — Global Support</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Managing complex Identity structures within Active Directory and ONE AD.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>GCP lifecycle operations (Google Admin Console).</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Identity Lifecycle Management via SailPoint (automated terminations).</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>IBM Notes and Domino database administration.</li></ul>"
+                     data-pt="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>08/2018 – 09/2020</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>PwC</h3><p class='text-blue-400 font-semibold text-sm mb-4'>IAM Analyst — Global Support</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Gestão de estruturas de Identidade complexas no Active Directory e ONE AD.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Operações de ciclo de vida no GCP (Google Admin Console).</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Identity Lifecycle Management via SailPoint (desligamentos automatizados).</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Administração de banco de dados IBM Notes e Domino.</li></ul>">
+                </div>
+            </div>
+
+            <!-- Siegwerk -->
+            <div class="tl-item reveal">
+                <div class="tl-date">09/2017 – 07/2018</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card lang-text"
+                     data-es="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>09/2017 – 07/2018</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>Siegwerk</h3><p class='text-blue-400 font-semibold text-sm mb-4'>IT Infrastructure Administrator — LATAM</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Administración de entornos híbridos y soporte L2/L3 regional.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Virtualización (VMware, Hyper-V, Citrix).</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Despliegue de MDM vía AirWatch (Workspace ONE) para Android/iOS.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Core Team Member en migración de Datacenter (Brasil).</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Operaciones de Datacenter y gestión de Backup.</li></ul>"
+                     data-en="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>09/2017 – 07/2018</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>Siegwerk</h3><p class='text-blue-400 font-semibold text-sm mb-4'>IT Infrastructure Administrator — LATAM</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>High-availability hybrid environment administration &amp; L2/L3 regional support.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Virtualization (VMware, Hyper-V, Citrix).</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>MDM deployment via AirWatch (Workspace ONE) for Android/iOS.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Core Team Member in Data Center Infrastructure Migration (Brazil).</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Datacenter operations and Backup management.</li></ul>"
+                     data-pt="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>09/2017 – 07/2018</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>Siegwerk</h3><p class='text-blue-400 font-semibold text-sm mb-4'>IT Infrastructure Administrator — LATAM</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Administração de ambientes híbridos e suporte L2/L3 regional.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Virtualização (VMware, Hyper-V, Citrix).</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Implantação de MDM via AirWatch (Workspace ONE) para Android/iOS.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Membro do Core Team na migração de Datacenter (Brasil).</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Operações de Datacenter e gestão de Backup.</li></ul>">
+                </div>
+            </div>
+
+            <!-- PepsiCo -->
+            <div class="tl-item reveal">
+                <div class="tl-date">04/2017 – 09/2017</div>
+                <div class="tl-dot"></div>
+                <div class="tl-card lang-text"
+                     data-es="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>04/2017 – 09/2017</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>PepsiCo</h3><p class='text-blue-400 font-semibold text-sm mb-4'>IT Support Specialist</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Soporte técnico On-site y remoto.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Despliegue y configuración de workstations y periféricos.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Soporte VIP y white-glove para ejecutivos C-level.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Gestión de infraestructura de salas de VC/AV.</li></ul>"
+                     data-en="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>04/2017 – 09/2017</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>PepsiCo</h3><p class='text-blue-400 font-semibold text-sm mb-4'>IT Support Specialist</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>On-site and remote technical assistance.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Deployment and configuration of workstations and peripherals.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>VIP and 'white-glove' support for C-level executives.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>VC room infrastructure and AV management.</li></ul>"
+                     data-pt="<span class='text-xs font-bold text-blue-400 tracking-widest uppercase' style='font-family:Space Mono,monospace'>04/2017 – 09/2017</span><h3 class='font-extrabold text-xl text-white mt-1 mb-1'>PepsiCo</h3><p class='text-blue-400 font-semibold text-sm mb-4'>IT Support Specialist</p><ul class='text-slate-400 text-sm space-y-2'><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Suporte técnico On-site e remoto.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Implantação e configuração de workstations e periféricos.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Suporte VIP e 'white-glove' para executivos C-level.</li><li class='flex gap-2'><i class='fas fa-chevron-right text-blue-500/70 mt-0.5 flex-shrink-0'></i>Gestão de infraestrutura de salas de VC/AV.</li></ul>">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════ FOOTER / CONTACTO ══════════════ -->
+<footer id="contacto" class="relative z-10 border-t border-slate-800/50 py-16 text-center">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-extrabold mb-3 text-white lang-text" data-es="¿Conectamos?" data-en="Let's Connect" data-pt="Vamos Conectar?"></h2>
+        <p class="text-slate-500 mb-8 lang-text" data-es="Abierto a oportunidades y proyectos desafiantes." data-en="Open to new opportunities and challenging projects." data-pt="Aberto a oportunidades e projetos desafiadores."></p>
+
+        <div class="flex justify-center gap-6 mb-10">
+            <a href="https://www.linkedin.com/in/matiasgmaciel/" target="_blank"
+               class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500 transition text-xl">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://MattMMG.github.io" target="_blank"
+               class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500 transition text-xl">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:mati.maciel7@gmail.com"
+               class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500 transition text-xl">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+
+        <p class="text-slate-600 text-xs uppercase tracking-widest" style="font-family:'Space Mono',monospace">
+            © 2026 Matias Maciel Gabriel &nbsp;·&nbsp; Zero Trust Advocate
+        </p>
+    </div>
+</footer>
+
+<script>
+    /* ── Starfield ── */
+    (function(){
+        const container = document.getElementById('stars');
+        for(let i=0;i<120;i++){
+            const s = document.createElement('div');
+            s.className = 'star';
+            const size = Math.random()*1.8+.4;
+            s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-duration:${Math.random()*5+3}s;animation-delay:${Math.random()*6}s`;
+            container.appendChild(s);
         }
-        // Cargar español por defecto al iniciar
-        window.onload = () => changeLanguage('es');
-    </script>
+    })();
+
+    /* ── Language ── */
+    let currentLang = 'es';
+    function changeLanguage(lang) {
+        currentLang = lang;
+        document.querySelectorAll('.lang-text').forEach(el => {
+            const val = el.getAttribute('data-' + lang);
+            if (!val) return;
+            // Detect HTML content
+            if (/<[a-z]/i.test(val)) {
+                el.innerHTML = val;
+            } else {
+                el.textContent = val;
+            }
+        });
+        // Active button state
+        ['es','en','pt'].forEach(l => {
+            const btn = document.getElementById('btn-'+l);
+            if(btn) btn.classList.toggle('active', l === lang);
+        });
+    }
+
+    /* ── Scroll reveal ── */
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ── Init ── */
+    window.addEventListener('DOMContentLoaded', () => changeLanguage('es'));
+</script>
 </body>
 </html>
-
