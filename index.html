@@ -6,107 +6,142 @@
     <title>Matias Maciel Gabriel | IAM & MDM Specialist</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .timeline-line::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: #e2e8f0; }
+        @media (min-width: 768px) { .timeline-line::before { left: 50%; } }
+        .floating-cv { position: fixed; bottom: 2rem; right: 2rem; z-index: 100; transition: transform 0.3s; }
+        .floating-cv:hover { transform: scale(1.1); }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans leading-normal tracking-normal">
+<body class="bg-slate-50 text-slate-900 font-sans leading-normal tracking-normal scroll-smooth">
 
-    <nav class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+    <div class="fixed top-20 right-4 z-[60] bg-white shadow-lg rounded-xl p-2 flex flex-col gap-2 border border-slate-200">
+        <button onclick="changeLanguage('es')" class="hover:bg-blue-50 p-2 rounded transition font-bold text-xs">🇪🇸 ES</button>
+        <button onclick="changeLanguage('en')" class="hover:bg-blue-50 p-2 rounded transition font-bold text-xs">🇺🇸 EN</button>
+        <button onclick="changeLanguage('pt')" class="hover:bg-blue-50 p-2 rounded transition font-bold text-xs">🇧🇷 PT</button>
+    </div>
+
+    <a href="CV-Matias-Maciel.pdf" target="_blank" class="floating-cv bg-blue-600 text-white p-4 rounded-full shadow-2xl flex items-center justify-center hover:bg-blue-700">
+        <i class="fas fa-file-pdf mr-2 text-xl"></i>
+        <span class="font-bold pr-2 lang-text" data-es="Descargar CV" data-en="Download CV" data-pt="Baixar CV">Descargar CV</span>
+    </a>
+
+    <nav class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-xl font-bold text-slate-800">MMG<span class="text-blue-600">.</span></a>
             <div class="hidden md:flex space-x-8 font-medium">
-                <a href="#experiencia" class="hover:text-blue-600 transition">Experiencia</a>
-                <a href="#skills" class="hover:text-blue-600 transition">Skills</a>
-                <a href="#casos" class="hover:text-blue-600 transition">Casos de Éxito</a>
-                <a href="#contacto" class="bg-slate-900 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition">Contacto</a>
+                <a href="#experiencia" class="hover:text-blue-600 transition lang-text" data-es="Experiencia" data-en="Experience" data-pt="Experiência">Experiencia</a>
+                <a href="#casos" class="hover:text-blue-600 transition lang-text" data-es="Casos de Éxito" data-en="Success Cases" data-pt="Casos de Sucesso">Casos de Éxito</a>
+                <a href="#contacto" class="bg-slate-900 text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition lang-text" data-es="Contacto" data-en="Contact" data-pt="Contato">Contacto</a>
             </div>
         </div>
     </nav>
 
     <header class="container mx-auto px-6 py-16 md:py-24 flex flex-col md:flex-row items-center">
         <div class="md:w-2/3 text-center md:text-left">
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 text-slate-800">
-                Matias Maciel Gabriel
-            </h1>
-            <h2 class="text-xl md:text-2xl text-blue-600 font-semibold mb-6">
-                IAM & MDM Specialist | Cybersecurity Learner
-            </h2>
-            <p class="text-lg text-slate-600 mb-8 max-w-2xl">
-                Especialista en <strong>Identity & Access Management</strong> y <strong>Mobile Device Management</strong> (Android & iOS). 
-                Enfocado en pilares de Zero Trust, BYOD y seguridad de la identidad. Un aprendiz permanente en el ecosistema de la Ciberseguridad.
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 text-slate-800">Matias Maciel Gabriel</h1>
+            <h2 class="text-xl md:text-2xl text-blue-600 font-semibold mb-6 italic">Identity & Access Management Specialist</h2>
+            <p class="text-lg text-slate-600 mb-8 max-w-2xl leading-relaxed lang-text" 
+               data-es="Especialista en IAM & MDM. Experto en entornos críticos con enfoque en Zero Trust y movilidad empresarial (Android/iOS)."
+               data-en="IAM & MDM Specialist. Expert in critical environments focusing on Zero Trust and enterprise mobility (Android/iOS)."
+               data-pt="Especialista em IAM & MDM. Expert em ambientes críticos com foco em Zero Trust e mobilidade empresarial (Android/iOS).">
+               Especialista en IAM & MDM. Experto en entornos críticos con enfoque en Zero Trust y movilidad empresarial (Android/iOS).
             </p>
             <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                <a href="#casos" class="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold shadow-lg hover:bg-blue-700 transition">Ver Proyectos</a>
-                <a href="#contacto" class="border-2 border-slate-800 text-slate-800 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-slate-800 hover:text-white transition">Hablemos</a>
+                <a href="#casos" class="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold shadow-lg hover:bg-blue-700 transition lang-text" data-es="Proyectos" data-en="Projects" data-pt="Projetos">Proyectos</a>
+                <a href="#experiencia" class="border-2 border-slate-800 text-slate-800 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-slate-800 hover:text-white transition lang-text" data-es="Trayectoria" data-en="Trajectory" data-pt="Trajetória">Trayectoria</a>
             </div>
         </div>
         <div class="md:w-1/3 mt-12 md:mt-0 flex justify-center">
-            <div class="relative">
-                <div class="absolute inset-0 bg-blue-600 rounded-2xl rotate-6 opacity-20"></div>
-                <img src="CV foto.jpg" alt="Matias Maciel Gabriel" class="relative w-64 h-80 object-cover rounded-2xl shadow-2xl border-4 border-white">
-            </div>
+            <img src="CV foto.jpg" alt="Matias Maciel Gabriel" class="w-64 h-80 object-cover rounded-2xl shadow-2xl border-4 border-white rotate-3 hover:rotate-0 transition duration-500">
         </div>
     </header>
 
-    <section id="skills" class="bg-white py-20">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center text-slate-800">Core Expertise</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-8 bg-slate-50 rounded-2xl border border-slate-100 hover:border-blue-300 transition group">
-                    <i class="fas fa-shield-halved text-4xl text-blue-600 mb-6 group-hover:scale-110 transition"></i>
-                    <h3 class="text-xl font-bold mb-3">Identity & Access Management</h3>
-                    <p class="text-slate-600 leading-relaxed">Implementación y gestión de ciclos de vida de identidad y pilares Zero Trust.</p>
+    <section id="casos" class="py-20 bg-slate-100">
+        <div class="container mx-auto px-6 text-center md:text-left">
+            <h2 class="text-3xl font-bold mb-12 text-center text-slate-800 uppercase tracking-widest lang-text" data-es="Casos de Éxito" data-en="Success Cases" data-pt="Casos de Sucesso">Casos de Éxito</h2>
+            <div class="max-w-4xl mx-auto bg-white p-8 rounded-3xl shadow-xl border-t-8 border-blue-600">
+                <div class="flex items-center mb-6">
+                    <div class="bg-blue-100 p-4 rounded-2xl mr-4"><i class="fas fa-mobile-alt text-3xl text-blue-600"></i></div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-800 uppercase">Zero Trust Implementation</h3>
+                        <p class="text-blue-600 font-bold tracking-wider">Devices Pillar - BYOD Project</p>
+                    </div>
                 </div>
-                <div class="p-8 bg-slate-50 rounded-2xl border border-slate-100 hover:border-blue-300 transition group">
-                    <i class="fas fa-mobile-screen text-4xl text-blue-600 mb-6 group-hover:scale-110 transition"></i>
-                    <h3 class="text-xl font-bold mb-3">Expert MDM (Android & iOS)</h3>
-                    <p class="text-slate-600 leading-relaxed">Gestión avanzada de dispositivos móviles empresariales y estrategias BYOD seguras.</p>
-                </div>
-                <div class="p-8 bg-slate-50 rounded-2xl border border-slate-100 hover:border-blue-300 transition group">
-                    <i class="fas fa-brain text-4xl text-blue-600 mb-6 group-hover:scale-110 transition"></i>
-                    <h3 class="text-xl font-bold mb-3">Soft Skills</h3>
-                    <p class="text-slate-600 leading-relaxed">Problem Solving, gestión de proyectos y una mentalidad 100% orientada a resultados.</p>
-                </div>
+                <div class="grid md:grid-cols-2 gap-8 lang-text" 
+                     data-es="<div><h4 class='font-bold mb-2'>Arquitectura:</h4><ul class='text-sm space-y-1'><li>• Ecosistema Microsoft 365 con licencias Enterprise.</li><li>• Diseño de UX en In Company Portal.</li><li>• Políticas de Acceso Condicional.</li></ul></div><div><h4 class='font-bold mb-2'>Seguridad Avanzada:</h4><ul class='text-sm space-y-1'><li>• Validación de Compliance y salud del dispositivo.</li><li>• Protección MAM-WE (Data Leak Prevention).</li><li>• Aislamiento de entorno personal y corporativo.</li></ul></div>"
+                     data-en="<div><h4 class='font-bold mb-2'>Architecture:</h4><ul class='text-sm space-y-1'><li>• Microsoft 365 Ecosystem with Enterprise licensing.</li><li>• UX Design for In Company Portal.</li><li>• Conditional Access Policies.</li></ul></div><div><h4 class='font-bold mb-2'>Advanced Security:</h4><ul class='text-sm space-y-1'><li>• Compliance Validation & device health.</li><li>• MAM-WE Protection (Data Leak Prevention).</li><li>• Personal vs Corporate environment isolation.</li></ul></div>"
+                     data-pt="<div><h4 class='font-bold mb-2'>Arquitetura:</h4><ul class='text-sm space-y-1'><li>• Ecossistema Microsoft 365 com licenças Enterprise.</li><li>• Design de UX no In Company Portal.</li><li>• Políticas de Acesso Condicional.</li></ul></div><div><h4 class='font-bold mb-2'>Segurança Avançada:</h4><ul class='text-sm space-y-1'><li>• Validação de Compliance e integridade do device.</li><li>• Proteção MAM-WE (Data Leak Prevention).</li><li>• Isolamento de dados pessoais e corporativos.</li></ul></div>">
+                    </div>
             </div>
         </div>
     </section>
 
-    <section id="casos" class="py-20 bg-slate-50">
+    <section id="experiencia" class="py-20 bg-white overflow-hidden">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center text-slate-800">Casos de Éxito</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-                    <span class="text-blue-600 font-bold text-sm uppercase tracking-widest">Infraestructura</span>
-                    <h3 class="text-2xl font-bold mt-2 mb-4">Despliegue Zero Trust</h3>
-                    <p class="text-slate-600 mb-6">Optimización de los accesos basados en identidad para un entorno corporativo dinámico.</p>
-                    <div class="flex items-center text-green-600 font-semibold">
-                        <i class="fas fa-check-circle mr-2"></i> Reducción de brechas de seguridad en accesos.
+            <h2 class="text-3xl font-bold mb-16 text-center text-slate-800 uppercase lang-text" data-es="Experiencia Profesional" data-en="Professional Experience" data-pt="Experiência Profissional">Experiencia Profesional</h2>
+            
+            <div class="relative timeline-line">
+                
+                <div class="mb-12 flex flex-col md:flex-row items-center w-full">
+                    <div class="hidden md:block w-1/2 pr-10 text-right font-bold text-blue-600 text-lg">04/2023 – Present</div>
+                    <div class="z-10 bg-blue-600 w-8 h-8 rounded-full border-4 border-white shadow"></div>
+                    <div class="w-full md:w-1/2 md:pl-10 mt-4 md:mt-0">
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 shadow-sm lang-text"
+                             data-es="<h3 class='font-bold text-xl'>Citibank</h3><p class='text-blue-600 font-bold mb-2'>Project Management & Risk Governance</p><ul class='text-sm space-y-1'><li>• Soporte técnico Tier 3 para aplicaciones críticas.</li><li>• Entrega end-to-end de migraciones GIAM.</li><li>• Gestión de riesgos y documentación CyberSecurity IAM.</li></ul>"
+                             data-en="<h3 class='font-bold text-xl'>Citibank</h3><p class='text-blue-600 font-bold mb-2'>Project Management & Risk Governance</p><ul class='text-sm space-y-1'><li>• Tier 3 technical advisory for mission-critical apps.</li><li>• End-to-end delivery of GIAM migrations.</li><li>• Risk reporting & CyberSecurity IAM documentation.</li></ul>"
+                             data-pt="<h3 class='font-bold text-xl'>Citibank</h3><p class='text-blue-600 font-bold mb-2'>Project Management & Risk Governance</p><ul class='text-sm space-y-1'><li>• Consultoria técnica Tier 3 para apps críticas.</li><li>• Entrega end-to-end de migrações GIAM.</li><li>• Gestão de riscos e documentação CyberSecurity IAM.</li></ul>">
+                        </div>
                     </div>
                 </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-                    <span class="text-blue-600 font-bold text-sm uppercase tracking-widest">Mobile Strategy</span>
-                    <h3 class="text-2xl font-bold mt-2 mb-4">Gestión Global de MDM</h3>
-                    <p class="text-slate-600 mb-6">Estandarización de flotas móviles bajo políticas estrictas de cumplimiento y BYOD.</p>
-                    <div class="flex items-center text-green-600 font-semibold">
-                        <i class="fas fa-check-circle mr-2"></i> +99% de dispositivos en cumplimiento normativo.
+
+                <div class="mb-12 flex flex-col md:flex-row items-center w-full">
+                    <div class="hidden md:block w-1/2 pr-10 text-right font-bold text-blue-600 text-lg">02/2021 – 04/2023</div>
+                    <div class="z-10 bg-blue-600 w-8 h-8 rounded-full border-4 border-white shadow"></div>
+                    <div class="w-full md:w-1/2 md:pl-10 mt-4 md:mt-0">
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 lang-text"
+                             data-es="<h3 class='font-bold text-xl'>EY GDS</h3><p class='text-blue-600 font-bold mb-2'>Senior Sec Admin L3 IAM</p><ul class='text-sm space-y-1'><li>• Soluciones SailPoint (lógica custom, grupos dinámicos).</li><li>• Arquitectura de File Servers Globales y ACLs.</li><li>• Administración de AD en entornos Prod/Test.</li></ul>"
+                             data-en="<h3 class='font-bold text-xl'>EY GDS</h3><p class='text-blue-600 font-bold mb-2'>Senior Sec Admin L3 IAM</p><ul class='text-sm space-y-1'><li>• SailPoint solutions (custom logic, dynamic groups).</li><li>• Global File Server architecture and ACLs.</li><li>• AD administration across Prod/Test environments.</li></ul>"
+                             data-pt="<h3 class='font-bold text-xl'>EY GDS</h3><p class='text-blue-600 font-bold mb-2'>Senior Sec Admin L3 IAM</p><ul class='text-sm space-y-1'><li>• Soluções SailPoint (lógica custom, grupos dinâmicos).</li><li>• Arquitetura de File Servers Globais e ACLs.</li><li>• Administração de AD em ambientes de Prod/Teste.</li></ul>">
+                        </div>
                     </div>
                 </div>
+
+                <div class="mb-12 flex flex-col md:flex-row items-center w-full">
+                    <div class="hidden md:block w-1/2 pr-10 text-right font-bold text-blue-600 text-lg">2020 – 2021</div>
+                    <div class="z-10 bg-blue-600 w-8 h-8 rounded-full border-4 border-white shadow"></div>
+                    <div class="w-full md:w-1/2 md:pl-10 mt-4 md:mt-0">
+                        <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 lang-text"
+                             data-es="<h3 class='font-bold text-xl'>DXC Technology</h3><p class='text-blue-600 font-bold mb-2'>Info Sec Analyst L2 (Vale Brazil)</p><ul class='text-sm space-y-1'><li>• Gestión de cuentas privilegiadas y atributos AD.</li><li>• Sincronización entre AD y O365 / Outlook.</li></ul>"
+                             data-en="<h3 class='font-bold text-xl'>DXC Technology</h3><p class='text-blue-600 font-bold mb-2'>Info Sec Analyst L2 (Vale Brazil)</p><ul class='text-sm space-y-1'><li>• Privileged account management and AD attributes.</li><li>• AD synchronization with O365 / Outlook.</li></ul>"
+                             data-pt="<h3 class='font-bold text-xl'>DXC Technology</h3><p class='text-blue-600 font-bold mb-2'>Info Sec Analyst L2 (Vale Brazil)</p><ul class='text-sm space-y-1'><li>• Gestão de contas privilegiadas e atributos de AD.</li><li>• Sincronização entre AD e O365 / Outlook.</li></ul>">
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <footer id="contacto" class="bg-slate-900 text-white py-16">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-4">¿Hablamos de ciberseguridad?</h2>
-            <p class="text-slate-400 mb-10">Aprendiz permanente y especialista en soluciones de identidad y movilidad.</p>
-            <div class="flex justify-center space-x-8 mb-12">
-                <a href="https://www.linkedin.com/in/matiasgmaciel/" class="text-3xl hover:text-blue-400 transition"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/MattMMG/MattMMG.github.io" class="text-3xl hover:text-blue-400 transition"><i class="fab fa-github"></i></a>
-                <a href="mailto:mati.maciel7@gmail.com" class="text-3xl hover:text-blue-400 transition"><i class="fas fa-envelope"></i></a>
-            </div>
-            <p class="text-slate-600 text-sm italic">"Security is a journey, not a destination."</p>
-            <p class="mt-8 text-slate-700 text-xs uppercase tracking-tighter">© 2026 Matias Maciel Gabriel</p>
+    <footer id="contacto" class="bg-slate-900 text-white py-16 text-center">
+        <h2 class="text-3xl font-bold mb-4 lang-text" data-es="¿Hablamos?" data-en="Let's talk" data-pt="Vamos conversar?">¿Hablamos?</h2>
+        <div class="flex justify-center space-x-8 text-3xl mb-8">
+            <a href="#" class="hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="hover:text-blue-400"><i class="fab fa-github"></i></a>
+            <a href="mailto:mati.maciel7@gmail.com" class="hover:text-blue-400"><i class="fas fa-envelope"></i></a>
         </div>
+        <p class="text-slate-500 text-xs uppercase tracking-tighter">© 2026 Matias Maciel Gabriel | IAM Specialist</p>
     </footer>
 
+    <script>
+        function changeLanguage(lang) {
+            document.querySelectorAll('.lang-text').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) el.innerHTML = text;
+            });
+        }
+        // Inicializar en español
+        window.onload = () => changeLanguage('es');
+    </script>
 </body>
 </html>
-
