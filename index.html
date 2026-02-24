@@ -168,11 +168,33 @@
     <button onclick="changeLanguage('pt')" id="btn-pt">🇧🇷 PT</button>
 </div>
 
-<!-- Floating CV Button -->
-<a href="CV-Matias-Maciel.pdf" target="_blank" class="floating-cv">
-    <i class="fas fa-file-pdf"></i>
-    <span class="lang-text" data-es="Descargar CV" data-en="Download CV" data-pt="Baixar CV">Descargar CV</span>
-</a>
+<!-- Floating CV Button — dropdown bilingüe -->
+<div id="cv-container" style="position:fixed; bottom:2rem; right:2rem; z-index:100; display:flex; flex-direction:column; align-items:flex-end; gap:.6rem;">
+
+    <!-- Popup con las dos opciones (oculto por defecto) -->
+    <div id="cv-popup" style="display:none; flex-direction:column; gap:.5rem; align-items:flex-end;">
+        <a href="CV_Matias_Maciel.pdf" target="_blank"
+           style="display:flex; align-items:center; gap:.5rem; background:#1e3a8a; color:#fff; padding:.7rem 1.2rem; border-radius:999px; font-weight:700; font-size:.88rem; text-decoration:none; border:1px solid rgba(147,197,253,.25); box-shadow:0 4px 20px rgba(37,99,235,.4); white-space:nowrap; transition:background .2s;"
+           onmouseover="this.style.background='#2563eb'" onmouseout="this.style.background='#1e3a8a'">
+            <span>🇪🇸</span> <i class="fas fa-file-pdf"></i> CV en Español
+        </a>
+        <a href="MMG CV 2026.pdf" target="_blank"
+           style="display:flex; align-items:center; gap:.5rem; background:#1e3a8a; color:#fff; padding:.7rem 1.2rem; border-radius:999px; font-weight:700; font-size:.88rem; text-decoration:none; border:1px solid rgba(147,197,253,.25); box-shadow:0 4px 20px rgba(37,99,235,.4); white-space:nowrap; transition:background .2s;"
+           onmouseover="this.style.background='#2563eb'" onmouseout="this.style.background='#1e3a8a'">
+            <span>🇺🇸</span> <i class="fas fa-file-pdf"></i> CV in English
+        </a>
+    </div>
+
+    <!-- Botón principal que abre/cierra el popup -->
+    <button onclick="toggleCvPopup()"
+            style="display:flex; align-items:center; gap:.5rem; background:#2563eb; color:#fff; padding:.9rem 1.4rem; border-radius:999px; font-weight:700; font-size:.95rem; border:1px solid rgba(147,197,253,.2); box-shadow:0 8px 32px rgba(37,99,235,.45); cursor:pointer; transition:transform .25s, background .25s;"
+            onmouseover="this.style.background='#3b82f6'; this.style.transform='scale(1.06)'"
+            onmouseout="this.style.background='#2563eb'; this.style.transform='scale(1)'">
+        <i class="fas fa-file-pdf"></i>
+        <span class="lang-text" data-es="Descargar CV" data-en="Download CV" data-pt="Baixar CV">Descargar CV</span>
+        <i id="cv-chevron" class="fas fa-chevron-up" style="font-size:.75rem; transition:transform .25s;"></i>
+    </button>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -413,8 +435,7 @@
                class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500 transition text-xl">
                 <i class="fab fa-github"></i>
             </a>
-            <a href="mailto:mati.maciel7@gmail.com"
-               class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500 transition text-xl">
+            <a href="/cdn-cgi/l/email-protection#f79a96839ed99a96949e929bc0b7909a969e9bd994989a" class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-blue-400 hover:border-blue-500 transition text-xl">
                 <i class="fas fa-envelope"></i>
             </a>
         </div>
@@ -425,7 +446,23 @@
     </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    /* ── CV Popup ── */
+    function toggleCvPopup() {
+        const popup   = document.getElementById('cv-popup');
+        const chevron = document.getElementById('cv-chevron');
+        const isOpen  = popup.style.display === 'flex';
+        popup.style.display     = isOpen ? 'none' : 'flex';
+        chevron.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
+    document.addEventListener('click', function(e) {
+        const container = document.getElementById('cv-container');
+        if (container && !container.contains(e.target)) {
+            document.getElementById('cv-popup').style.display = 'none';
+            document.getElementById('cv-chevron').style.transform = 'rotate(0deg)';
+        }
+    });
+
     /* ── Starfield ── */
     (function(){
         const container = document.getElementById('stars');
@@ -445,14 +482,12 @@
         document.querySelectorAll('.lang-text').forEach(el => {
             const val = el.getAttribute('data-' + lang);
             if (!val) return;
-            // Detect HTML content
             if (/<[a-z]/i.test(val)) {
                 el.innerHTML = val;
             } else {
                 el.textContent = val;
             }
         });
-        // Active button state
         ['es','en','pt'].forEach(l => {
             const btn = document.getElementById('btn-'+l);
             if(btn) btn.classList.toggle('active', l === lang);
@@ -465,12 +500,4 @@
             if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
         });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    /* ── Init ── */
-    window.addEventListener('DOMContentLoaded', () => changeLanguage('es'));
-</script>
-</body>
-</html>
-
-
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(e
