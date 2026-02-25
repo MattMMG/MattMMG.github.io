@@ -693,8 +693,22 @@
         entries.forEach(function(e) {
             if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
     document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
 
+    /* Fallback: forzar visibilidad si IntersectionObserver no dispara */
+    setTimeout(function() {
+        document.querySelectorAll('.reveal:not(.visible)').forEach(function(el) {
+            el.classList.add('visible');
+        });
+    }, 300);
+
+    /* Init */
     if (document.readyState === 'loading') {
-        document.addEventListe
+        document.addEventListener('DOMContentLoaded', function() { changeLanguage('es'); });
+    } else {
+        changeLanguage('es');
+    }
+</script>
+</body>
+</html>
